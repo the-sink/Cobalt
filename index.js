@@ -66,7 +66,7 @@ const init = async () => {
   client.logger.log(`Loading a total of ${evtFiles.length} events.`);
   evtFiles.forEach(file => {
     const eventName = file.split(".")[0];
-    client.logger.log(`Loading Event: ${eventName}`);
+    //client.logger.log(`Loading Event: ${eventName}`);
     const event = require(`./events/${file}`);
     // Bind the client to any event, before the existing arguments
     // provided by the discord.js event. 
@@ -86,5 +86,11 @@ const init = async () => {
 
 // End top-level async/await function.
 };
+
+process.on('SIGINT', function(){
+  client.logger.log("Disconnecting...")
+  client.destroy();
+  process.exit();
+});
 
 init();
