@@ -1,4 +1,6 @@
 const fetch = require("node-fetch");
+const { promisify } = require("util");
+const readdir = promisify(require("fs").readdir);
 
 module.exports = async client => {
   // Log that the bot is online.
@@ -24,6 +26,17 @@ module.exports = async client => {
         client.logger.warn(`Unable to retrieve a new session key for the InspiroBot audio command: ${err}`)
     };
   })();
+
+  const modFiles = await readdir("./modules/");
+  let numModules = 0;
+  modFiles.forEach(file => {
+    if (!file.endsWith(".js")) return;
+    const moduleName = file.split(".")[0];
+    if (client.config.modules[moduleName] == true){
+      numModules++;
+      require(`../modules/${file}`)(client);
+  }});
+  client.logger.log(`Loaded ${numModules} modules.`);
 
   // Make the bot "play the game" which is the help command with default prefix.
   client.user.setActivity(`${client.settings.get("default").prefix}help`, {type: "PLAYING"});
