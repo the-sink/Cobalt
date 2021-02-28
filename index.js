@@ -79,20 +79,6 @@ const init = async () => {
     client.levelCache[thisLevel.name] = thisLevel.level;
   }
 
-
-  // Next, we'll run all the non-internal modules.
-  // Might need to initialize modules in the "ready" event instead so that modules can get access to bot-related stuff
-  const modFiles = await readdir("./modules/");
-  let numModules = 0;
-  modFiles.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    const moduleName = file.split(".")[0];
-    if (client.config.modules[moduleName] == true){
-      numModules++;
-      require(`./modules/${file}`)(client);
-  }});
-  client.logger.log(`Loaded ${numModules} modules.`);
-
   // Here we login the client.
   client.login(client.config.token);
 

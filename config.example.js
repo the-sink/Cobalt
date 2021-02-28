@@ -3,6 +3,9 @@
 // Similarly, the "data/" directory can contain sensitive information. Ensure that is not committed either.
 
 const config = {
+  // The prefix you must place before a command for it to be registered by the bot (such as "~command" vs "!command")
+  "prefix": "-",
+
   // Bot Owner, level 10 by default. A User ID. Should never be anything else than the bot owner's ID.
   "ownerID": "",
 
@@ -38,21 +41,14 @@ const config = {
 
   "serverListPort": 2572,
 
-  // Default per-server settings. New guilds have these settings. 
+  "modRole": "Moderator",
+  "adminRole": "Administrator",
 
-  // DO NOT LEAVE ANY OF THESE BLANK, AS YOU WILL NOT BE ABLE TO UPDATE THEM
-  // VIA COMMANDS IN THE GUILD.
-  
-  "defaultSettings": {
-    "prefix": "-",
-    "modLogChannel": "mod-log",
-    "modRole": "Moderator",
-    "adminRole": "Administrator",
-    "systemNotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
-    "welcomeChannel": "welcome",
-    "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-    "welcomeEnabled": "false"
-  },
+  "systemNotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
+
+  "welcomeChannel": "welcome",
+  "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
+  "welcomeEnabled": "false",
 
   // PERMISSION LEVEL DEFINITIONS.
 
