@@ -80,8 +80,8 @@ module.exports = (client) => {
                     client.logger.warn("Malformed/non-JSON data was sent to the server list module.");
                     return;
                 }
-                // Make sure the provided server key is correct, and set up a response
-                if (json.serverKey == null || json.serverKey != key){
+                // Make sure the provided auth key is correct, and set up a response
+                if (json.authKey == null || json.authKey != key){
                     client.logger.warn("Server list request contained an invalid Server Key.");
                     sendResponse(res, 403, "Unauthorized");
                     return;
