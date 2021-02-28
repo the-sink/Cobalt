@@ -17,7 +17,7 @@ const config = {
 
   // List of modules that can be enabled/disabled
   "modules": {
-    "serverList": true
+    "serverList": false
   },
 
   // Guild channel IDs for certain functionality
