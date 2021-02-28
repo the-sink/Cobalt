@@ -8,14 +8,15 @@ module.exports = async client => {
   
   // This loop ensures that client.application always contains up to date data
   // about the app's status. This includes whether the bot is public or not,
-  // its description, owner(s), etc. Used for the dashboard amongs other things.
+  // its description, owner(s), etc. Used for the dashboard among other things.
+  // Updated every 5 minutes.
   client.application = await client.fetchApplication();
   if (client.owners.length < 1) client.application.team ? client.owners.push(...client.application.team.members.keys()) : client.owners.push(client.application.owner.id);
   setInterval( async () => {
     client.owners = [];
     client.application = await client.fetchApplication();
     client.application.team ? client.owners.push(...client.application.team.members.keys()) : client.owners.push(client.application.owner.id);
-  }, 60000);
+  }, 300000);
 
   (async () => {
     try {
@@ -39,5 +40,5 @@ module.exports = async client => {
   client.logger.log(`Loaded ${numModules} modules.`);
 
   // Make the bot "play the game" which is the help command with default prefix.
-  client.user.setActivity(`${client.settings.get("default").prefix}help`, {type: "PLAYING"});
+  client.user.setActivity(`${client.settings.get("default").prefix}help | v${process.env.npm_package_version}`, {type: "PLAYING"});
 };
