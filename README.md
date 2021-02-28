@@ -5,7 +5,7 @@
 
 A bot used by the JKR Discord Server, based on the [guidebot framework](https://github.com/AnIdiotsGuide/guidebot) and with code snippets referenced from [woomy](https://github.com/woomyware/woomy).
 
-This bot is currently being worked on and is no where near a functional state. It will be added to the main server once it is at a point of being just as functional (or more functional) than the existing Cobalt bot. A rewrite was needed due to how poorly written the first version of Cobalt is (trust me, it's bad, I haven't even shown any of the other JKR developers) and starting from a fairly sturdy framework seems like a helpful nudge to eventually have a much more well-rounded bot.
+This bot is currently being worked on and functionality from the old bot is being cleaned up/rewritten and ported over. A rewrite was needed due to how poorly written the first version of Cobalt is (trust me, it's bad, I haven't even shown any of the other JKR developers) and starting from a fairly sturdy framework seems like a helpful nudge to eventually have a much more well-rounded bot.
 
 Also, it's in Discord.js instead of Eris - considering this bot is only intended to be used on one server, the Eris optimizations are not needed and Discord.js has a far more 'detailed' API and online support community.
 
