@@ -15,21 +15,29 @@ const config = {
   // Bot Support, level 8 by default. Array of user ID strings
   "support": [],
 
+  ///// The following are secrets, do not share these with anyone! /////
+
   // Your Bot's Token. Available on https://discord.com/developers/applications/me
   "token": "",
 
+  // Your Roblox account's (you should probably use a separate bot account, not your main one) security token to be used by noblox.js.
+  "robloxCookie": "",
+
+  // The key to be used for authorizing server list-related network messages.
+  "serverListKey": "",
+
+  //////////////////////////////////////////////////////////////////////
+
   // List of modules that can be enabled/disabled
   "modules": {
-    "serverList": false
+    "serverList": false,
+    "restrictedRole": true
   },
 
   // Guild channel IDs for certain functionality
   "channels": {
     "serverList": ""
   },
-
-  // Your Roblox account's (you should probably use a separate bot account, not your main one) security token to be used by noblox.js.
-  "robloxCookie": "",
 
   // API endpoints, needed for some commands
   "endpoints": {},
