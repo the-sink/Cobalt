@@ -46,7 +46,7 @@ exports.run = async (client, message, [action, key, ...value], level) => { // es
     if (!defaults[key]) return message.reply("This key does not exist in the settings");
     if (!overrides[key]) return message.reply("This key does not have an override and is already using defaults.");
     
-    // Good demonstration of the custom awaitReply method in `./modules/functions.js` !
+    // Good demonstration of the custom awaitReply method in `./modules/internal/functions.js` !
     const response = await client.awaitReply(message, `Are you sure you want to reset ${key} to the default value?`);
 
     // If they respond with y or yes, continue.

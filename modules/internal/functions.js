@@ -100,7 +100,7 @@ module.exports = (client) => {
     text = text
       .replace(/`/g, "`" + String.fromCharCode(8203))
       .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
+      .replace(client.token, "[token]");
 
     return text;
   };
@@ -108,7 +108,7 @@ module.exports = (client) => {
   client.loadCommand = (commandName) => {
     try {
       //client.logger.log(`Loading Command: ${commandName}`);
-      const props = require(`../commands/${commandName}`);
+      const props = require(`../../commands/${commandName}`);
       if (props.init) {
         props.init(client);
       }
@@ -134,8 +134,8 @@ module.exports = (client) => {
     if (command.shutdown) {
       await command.shutdown(client);
     }
-    const mod = require.cache[require.resolve(`../commands/${command.help.name}`)];
-    delete require.cache[require.resolve(`../commands/${command.help.name}.js`)];
+    const mod = require.cache[require.resolve(`../../commands/${command.help.name}`)];
+    delete require.cache[require.resolve(`../../commands/${command.help.name}.js`)];
     for (let i = 0; i < mod.parent.children.length; i++) {
       if (mod.parent.children[i] === mod) {
         mod.parent.children.splice(i, 1);

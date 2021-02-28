@@ -1,6 +1,10 @@
+// This file contains sensitive tokens that, if shared, could do significant damage. Do not share your real config.js with anyone you don't trust, and do not post it online.
+// Make sure your .gitignore contains a "config.js" entry before committing.
+// Similarly, the "data/" directory can contain sensitive information. Ensure that is not committed either.
+
 const config = {
   // Bot Owner, level 10 by default. A User ID. Should never be anything else than the bot owner's ID.
-  "ownerID": "123456789123456",
+  "ownerID": "",
 
   // Bot Admins, level 9 by default. Array of user ID strings.
   "admins": [],
@@ -9,18 +13,37 @@ const config = {
   "support": [],
 
   // Your Bot's Token. Available on https://discord.com/developers/applications/me
-  "token": "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0",
+  "token": "",
 
-  "emojis": {
-    "error": "<:error:813868901473320970>"
+  // List of modules that can be enabled/disabled
+  "modules": {
+    "serverList": true
   },
+
+  // Guild channel IDs for certain functionality
+  "channels": {
+    "serverList": ""
+  },
+
+  // Your Roblox account's (you should probably use a separate bot account, not your main one) security token to be used by noblox.js.
+  "robloxCookie": "",
+
+  // API endpoints, needed for some commands
+  "endpoints": {},
+
+  // Emojis to use in bot messages (such as success/error indicators)
+  "emojis": {
+    "error": "<:error:000000000000000000>"
+  },
+
+  "serverListPort": 2572,
 
   // Default per-server settings. New guilds have these settings. 
 
   // DO NOT LEAVE ANY OF THESE BLANK, AS YOU WILL NOT BE ABLE TO UPDATE THEM
   // VIA COMMANDS IN THE GUILD.
   
-  "defaultSettings" : {
+  "defaultSettings": {
     "prefix": "-",
     "modLogChannel": "mod-log",
     "modRole": "Moderator",
