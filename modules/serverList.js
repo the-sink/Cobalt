@@ -12,6 +12,24 @@ function sendResponse(res, code, message){
     res.end();
 }
 
+function update(json, res, add){
+    let server = servers[json.serverKey];
+    if (server == null){
+        sendResponse(res, 500, "A server by that key does not exist.");
+        return;
+    };
+    if (add){
+        server.players.push(json.playerName);
+    } else {
+        server.players = server.players.filter(e => e !== json.playerName);
+        if (server.players.length==0) return;
+    }
+    let list = server.players.join(", ") || "None";
+    if (server.private == true && server.branch == "Release"){list = "*(Private)*"};
+    server.message.edit("> " + ((server.branch == "Development" && ":tools:") || "") + ((server.private == true && ":lock:") || "") +" Server " + server.id + " has: **" + server.players.length + " player(s) out of 42**. It was created on: **" + server.created +"**.\n Currently online: " + (list));
+    sendResponse(res, 200, "Success");
+}
+
 let actions = {
     "start": function(json, res){ // Sent when a new server is created
         // If a server already exists with the same key, ignore it and send an error code
@@ -36,10 +54,18 @@ let actions = {
         });
     },
     "playerAdd": function(json, res){ // Sent when a player has joined a server
-
+        if (json.playerName != null){
+            update(json, res, true);
+        } else {
+            sendResponse(res, 500, "No player name provided.");
+        }
     },
     "playerRemove": function(json, res){ // Sent when a player has left a server
-
+        if (json.playerName != null){
+            update(json, res, false);
+        } else {
+            sendResponse(res, 500, "No player name provided.");
+        }
     },
     "stop": function(json, res){ // Sent when a server is shutting down
         if (servers[json.serverKey] == null){
