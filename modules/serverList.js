@@ -7,9 +7,13 @@ let index = 1;
 let channel;
 
 function sendResponse(res, code, message){
-    res.writeHead(code, {'Content-Type': 'text/html'});
-    res.write(message);
-    res.end();
+	try {
+	    res.writeHead(code, {'Content-Type': 'text/html'});
+	    res.write(message);
+	    res.end();
+	} catch(e) {
+		client.logger.warn(`Error while sending response:  ${e}`)
+	}
 }
 
 function update(json, res, add){
@@ -52,6 +56,7 @@ let actions = {
                 private: json.private
             }
         });
+        sendResponse(res, 200, "Success");
     },
     "playerAdd": function(json, res){ // Sent when a player has joined a server
         if (json.playerName != null){
@@ -76,6 +81,7 @@ let actions = {
         // Remove server message and clear from list
         servers[json.serverKey].message.delete();
         delete servers[json.serverKey];
+        sendResponse(res, 200, "Success");
     }
 }
 
@@ -123,8 +129,7 @@ module.exports = (client) => {
                 try {
                     json = JSON.parse(data);
                 } catch(e) {
-                    client.logger.warn("Malformed/non-JSON data was sent to the server list module.");
-                    return;
+                    return; // malformed or non-json data, logging this is probably unneccesary
                 }
                 // Make sure the provided auth key is correct, and set up a response
                 if (json.authKey == null || json.authKey != key){
