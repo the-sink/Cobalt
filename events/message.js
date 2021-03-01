@@ -22,7 +22,13 @@ module.exports = async (client, message) => {
   // Check whether the command, or alias, exist in the collections defined in app.js.
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
 
-  if (!cmd) return;
+  if (!cmd) {
+    // Command doesn't exist. Now, search for simple response message stored in responses.js and if one exists send it.
+    if (client.responses[command] != null){
+      message.channel.send(client.responses[command]);
+    }
+    return;
+  }
 
   // Some commands may not be useable in DMs. This check prevents those commands from running and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly)

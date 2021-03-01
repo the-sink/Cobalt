@@ -17,8 +17,18 @@ const client = new Discord.Client({ ws: { intents: [
 ]}});
 
 client.config = config;
-client.logger = require("./modules/internal/Logger");
+client.logger = require("./modules/internal/logger.js");
 require("./modules/internal/functions.js")(client);
+
+// Generate simple text responses as defined in responses.js
+client.responses = {};
+let responseTable = require("./responses.js");
+for (let i=0; i < responseTable.length; i++){
+  let response = responseTable[i];
+  for (let k=0; k < response.keywords.length; k++){
+    client.responses[response.keywords[k]] = response.message;
+  }
+}
 
 client.owners = [];
 client.commands = new Enmap();
