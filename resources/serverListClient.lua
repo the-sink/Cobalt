@@ -18,15 +18,15 @@ local function GenerateInfo(body)
   }
 end
 
-local function PlayerSignal(player, call)
-  http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, call = call, playerName = (private and "private") or player.Name}))  
+local function PlayerSignal(player, action)
+  http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, action = action, playerName = (private and "private") or player.Name}))  
 end
 
 if RunService:IsStudio() then return end -- Don't send server list data when in studio
 
 local private = game.PrivateServerOwnerId ~= 0
 
-http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, call = "start", branch = branch, private = private}))
+http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, action = "start", branch = branch, private = private}))
 wait(1)
 
 for _,player in pairs(Players:GetPlayers()) do
@@ -41,5 +41,5 @@ Players.PlayerRemoving:Connect(function(player)
 end)
 
 game:BindToClose(function()
-  http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, call = "stop"}))
+  http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, action = "stop"}))
 end)
