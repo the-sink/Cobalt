@@ -21,6 +21,19 @@ let actions = {
         }
 
         // Create player list message
+        let msg;
+        index++;
+        channel.send(`> :white_check_mark: Server ${index} was created. Waiting for players...`).then(message => {
+            msg = message;
+            servers[json.serverKey] = {
+                id: index,
+                message: msg,
+                players: [],
+                created: new Date().toUTCString(),
+                branch: json.branch || "?",
+                private: json.private
+            }
+        });
     },
     "playerAdd": function(json, res){ // Sent when a player has joined a server
 
@@ -29,7 +42,14 @@ let actions = {
 
     },
     "stop": function(json, res){ // Sent when a server is shutting down
+        if (servers[json.serverKey] == null){
+            sendResponse(res, 500, "A server with that key does not exist.");
+            return;
+        }
 
+        // Remove server message and clear from list
+        servers[json.serverKey].message.delete();
+        delete servers[json.serverKey];
     }
 }
 
@@ -93,9 +113,9 @@ module.exports = (client) => {
                 }
             })
         }).listen(port);
+        client.logger.log(`Server listening on port ${port} for server list module.`);
     } catch(e) {
         client.logger.warn(`An error occured while starting the server list module's HTTP server: ${e}`);
         return;
     }
-    client.logger.log(`Server listening on port ${port} for server list module.`);
 }; 
