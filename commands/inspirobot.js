@@ -3,18 +3,16 @@ const Discord = require("discord.js");
 
 exports.run = async (client, message, args, level) => {
   message.channel.startTyping();
-  (async () => {
-    try {
-        await fetch('http://inspirobot.me/api?generate=true')
-          .then(res => res.text())
-          .then(body => message.channel.send({files: [new Discord.MessageAttachment(body)]}));
-        message.channel.stopTyping();
-    } catch (err) {
-        message.channel.send(`${client.config.emojis.error} An error has occured! InspiroBot may be having issues.`);
-        client.logger.warn(`Error while retrieving/posting InspiroBot image: ${err}`)
-        message.channel.stopTyping();
-    };
-  })();
+  try {
+      await fetch('http://inspirobot.me/api?generate=true')
+        .then(res => res.text())
+        .then(body => message.channel.send({files: [new Discord.MessageAttachment(body)]}));
+      message.channel.stopTyping();
+  } catch (err) {
+      message.channel.send(`${client.config.emojis.error} An error has occured! InspiroBot may be having issues.`);
+      client.logger.warn(`Error while retrieving/posting InspiroBot image: ${err}`);
+      message.channel.stopTyping();
+  };
 };
 
 exports.conf = {

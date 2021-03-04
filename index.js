@@ -5,6 +5,7 @@ const Discord = require("discord.js");
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
+const roblox = require("noblox.js");
 const config = require("./config.js");
 
 const client = new Discord.Client({ ws: { intents: [
@@ -19,6 +20,13 @@ const client = new Discord.Client({ ws: { intents: [
 client.config = config;
 client.logger = require("./modules/internal/logger.js");
 require("./modules/internal/functions.js")(client);
+
+// Set up noblox.js if a robloxCookie is given in the config
+
+if (config.robloxCookie != null && config.robloxCookie != "") { //is there a better way to write this if statement?
+  roblox.setCookie(config.robloxCookie);
+  client.roblox = roblox;
+}
 
 // Generate simple text responses as defined in responses.js
 client.responses = {};
