@@ -138,9 +138,9 @@ module.exports = (client) => {
                     return;
                 }
 
-                // Execute code for the provided call
-                if (actions[json.call] != null){
-                    actions[json.call](json, res);
+                // Execute code for the provided action
+                if (actions[json.action] != null){
+                    actions[json.action](json, res);
                 }
             })
         }).listen(port);
