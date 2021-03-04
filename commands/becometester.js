@@ -30,8 +30,19 @@ exports.run = async (client, message, args, level) => {
                     let currentRole = await client.roblox.getRankInGroup(970502, id);
                     switch (currentRole) {
                         case 1:
+                            let role = message.guild.roles.cache.find(role => role.name === "Tester");
+                            let success = true;
+                            client.settings.set(`uidCache_${message.author.id}`, id);
                             await client.roblox.setRank({group: 970502, target: id, rank: 2}); // group id, user id, and new rank id
-                            sendEmbed(message, "Promotion Success", "You have been promoted to the Project Tester rank! This gives you access to the CVRF development build as well as the discord channel and rank.", 0x33ee33, null, authorData, "Note: You must stay on this server or the rank will be removed!");
+                            message.member.roles.add(role).catch(err => {
+                                success = false;
+                                client.logger.warn(`Error while attempting to give user the Tester role: ${err}`);
+                            });
+                            if (success) {
+                                sendEmbed(message, "Promotion Success", "You have been promoted to the Project Tester rank! This gives you access to the CVRF development build as well as the discord channel and rank.", 0x33ee33, null, authorData, "Note: You must stay on this server or the rank will be removed!");
+                            } else {
+                                sendEmbed(message, "Bot Error", "You were probably promoted on Roblox, but an error occured while attempting to give the Tester rank on Discord. Please contact the bot owner (the problem was loggged).", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
+                            }
                             break;
                         case 0:
                             sendEmbed(message, "Promotion Rejected", "You are not in the group. Please join JKR Productions on Roblox to be promoted to Project Tester. Click the next above to navigate to the group page.", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
