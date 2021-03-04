@@ -42,6 +42,7 @@ client.owners = [];
 client.commands = new Enmap();
 client.aliases = new Enmap();
 client.settings = new Enmap({name: "settings"});
+client.mutes = new Enmap({name: "mutes"});
 
 const init = async () => {
 
