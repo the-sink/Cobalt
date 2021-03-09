@@ -18,7 +18,7 @@ Feel free to look around. If you find any issues or would like to make improveme
 
 ## Intents
 
-For info about intents check out the [official Discord.js guide page](https://discordjs.guide/popular-topics/intents.html) and the [official Discord docs page](https://discord.com/developers/docs/topics/gateway#gateway-intents). Certain intents may require extra steps.
+Intents can be added/removed near the top of ``index.js`` when the Discord client is created. For info about intents check out the [official Discord.js guide page](https://discordjs.guide/popular-topics/intents.html) and the [official Discord docs page](https://discord.com/developers/docs/topics/gateway#gateway-intents). Certain intents may require extra steps.
 
 ## Starting the bot
 
