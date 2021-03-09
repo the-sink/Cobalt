@@ -13,7 +13,11 @@ function sendEmbed(message, title, description, color, url, author, footer){
 
 exports.run = async (client, message, args, level) => {
     if (client.roblox == null){
-        sendEmbed(message, "Bot Error", "``noblox.js`` is currently unavailable. Please notify the bot owner if this command is supposed to be enabled.", 0xee3333);
+        client.sendEmbed(message, {
+            title: "Bot Error",
+            description: "``noblox.js`` is currently unavailable. Please notify the bot owner if this command is supposed to be enabled.",
+            color: 0xee3333
+        });
         client.logger.warn("Someone tried to run \"becometester\" but noblox.js is not accessible. Maybe client.robloxCookie is empty/doesn't exist?");
     }
 
@@ -39,7 +43,7 @@ exports.run = async (client, message, args, level) => {
                                 client.logger.warn(`Error while attempting to give user the Tester role: ${err}`);
                             });
                             if (success) {
-                                sendEmbed(message, "Promotion Success", "You have been promoted to the Project Tester rank! This gives you access to the CVRF development build as well as the discord channel and rank.", 0x33ee33, null, authorData, "Note: You must stay on this server or the rank will be removed!");
+                                sendEmbed(message, "Promotion Success", "You have been promoted to the Project Tester rank! This gives you access to the CVRF development build as well as the discord channel and rank.", 0x33ee33, "https://www.roblox.com/groups/970502/JK-Production", authorData, "Note: You must stay on this server or the rank will be removed!");
                             } else {
                                 sendEmbed(message, "Bot Error", "You were probably promoted on Roblox, but an error occured while attempting to give the Tester rank on Discord. Please contact the bot owner (the problem was loggged).", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
                             }
@@ -48,7 +52,7 @@ exports.run = async (client, message, args, level) => {
                             sendEmbed(message, "Promotion Rejected", "You are not in the group. Please join JKR Productions on Roblox to be promoted to Project Tester. Click the next above to navigate to the group page.", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
                             break;
                         default:
-                            sendEmbed(message, "Promotion Rejected", "You are already a Project Tester or higher in JKR!", 0xee3333, null, authorData);
+                            sendEmbed(message, "Promotion Rejected", "You are already a Project Tester or higher in JKR!", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
                             break;
                     }
                 })();

@@ -117,36 +117,31 @@ module.exports = (client) => {
     })
 
     // Start the HTTP server to listen for server list updates
-    try {
-        http.createServer((req, res) => {
-            let data = []
-            req.on('data', chunk => {
-                data.push(chunk)
-            })
-            req.on('end', () => {
-                let json;
-                // Check if the data is correctly formatted JSON or not
-                try {
-                    json = JSON.parse(data);
-                } catch(e) {
-                    return; // malformed or non-json data, logging this is probably unneccesary
-                }
-                // Make sure the provided auth key is correct, and set up a response
-                if (json.authKey == null || json.authKey != key){
-                    client.logger.warn("Server list request contained an invalid Server Key.");
-                    sendResponse(res, 403, "Unauthorized");
-                    return;
-                }
+    http.createServer((req, res) => {
+        let data = []
+        req.on('data', chunk => {
+            data.push(chunk)
+        })
+        req.on('end', () => {
+            let json;
+            // Check if the data is correctly formatted JSON or not
+            try {
+                json = JSON.parse(data);
+            } catch(e) {
+                return; // malformed or non-json data, logging this is probably unneccesary
+            }
+            // Make sure the provided auth key is correct, and set up a response
+            if (json.authKey == null || json.authKey != key){
+                client.logger.warn("Server list request contained an invalid Server Key.");
+                sendResponse(res, 403, "Unauthorized");
+                return;
+            }
 
-                // Execute code for the provided action
-                if (actions[json.action] != null){
-                    actions[json.action](json, res);
-                }
-            })
-        }).listen(port);
-        client.logger.log(`Server listening on port ${port} for server list module.`);
-    } catch(e) {
-        client.logger.warn(`An error occured while starting the server list module's HTTP server: ${e}`);
-        return;
-    }
+            // Execute code for the provided action
+            if (actions[json.action] != null){
+                actions[json.action](json, res);
+            }
+        })
+    }).listen(port).once('error', (err) => {client.logger.warn(`An error occured while starting the server list module's HTTP server: ${err}`);});
+    client.logger.log(`Server listening on port ${port} for server list module.`);
 }; 

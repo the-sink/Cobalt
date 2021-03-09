@@ -43,6 +43,20 @@ client.commands = new Enmap();
 client.aliases = new Enmap();
 client.settings = new Enmap({name: "settings"});
 client.mutes = new Enmap({name: "mutes"});
+//title, description, color, url, author, footer
+client.sendEmbed = function(message, options){
+  if (!options || !message) {
+    client.logger.warn("You need to specify options to send an embed!");
+    return;
+  }
+  const embed = new Discord.MessageEmbed()
+      .setTitle(options.title)
+      .setDescription(options.description)
+      .setColor(options.color)
+      .setURL(options.url)
+      .setAuthor(options.author.name, options.author.image, options.author.url);
+  message.channel.send(embed);
+}
 
 const init = async () => {
 
