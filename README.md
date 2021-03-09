@@ -14,7 +14,7 @@ Feel free to look around. If you find any issues or would like to make improveme
 
 - `git`
 - `node` 12.0.0 or higher
-- node-gyp build tools (required for Enmap and many other libraries
+- node-gyp build tools (required for Enmap and many other libraries)
 
 ## Intents
 
