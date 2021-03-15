@@ -43,26 +43,57 @@ exports.run = async (client, message, args, level) => {
                                 client.logger.warn(`Error while attempting to give user the Tester role: ${err}`);
                             });
                             if (success) {
-                                sendEmbed(message, "Promotion Success", "You have been promoted to the Project Tester rank! This gives you access to the CVRF development build as well as the discord channel and rank.", 0x33ee33, "https://www.roblox.com/groups/970502/JK-Production", authorData, "Note: You must stay on this server or the rank will be removed!");
+                                client.sendEmbed(message, {
+                                    title: "Promotion Success",
+                                    description: "You have been promoted to the Project Tester rank! This gives you access to the CVRF development build as well as the discord channel and rank.",
+                                    color: 0x33ee33,
+                                    url: "https://www.roblox.com/groups/970502/JK-Production",
+                                    author: authorData,
+                                    footer: "Note: You must stay on this server or the rank will be removed!"
+                                });
                             } else {
-                                sendEmbed(message, "Bot Error", "You were probably promoted on Roblox, but an error occured while attempting to give the Tester rank on Discord. Please contact the bot owner (the problem was loggged).", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
+                                client.sendEmbed(message, {
+                                    title: "Bot Error",
+                                    description: "You were probably promoted on Roblox, but an error occured while attempting to give the Tester rank on Discord. Please contact the bot owner (the problem was loggged).",
+                                    color: 0xee3333,
+                                    author: authorData
+                                });
                             }
                             break;
                         case 0:
-                            sendEmbed(message, "Promotion Rejected", "You are not in the group. Please join JKR Productions on Roblox to be promoted to Project Tester. Click the next above to navigate to the group page.", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
+                            client.sendEmbed(message, {
+                                title: "Promotion Rejected",
+                                description: "You are not in the group. Please join JKR Productions on Roblox to be promoted to Project Tester. Click the next above to navigate to the group page.",
+                                color: 0xee3333,
+                                url: "https://www.roblox.com/groups/970502/JK-Production",
+                                author: authorData
+                            });
                             break;
                         default:
-                            sendEmbed(message, "Promotion Rejected", "You are already a Project Tester or higher in JKR!", 0xee3333, "https://www.roblox.com/groups/970502/JK-Production", authorData);
+                            client.sendEmbed(message, {
+                                title: "Promotion Rejected",
+                                description: "You are already a Project Tester or higher in JKR!",
+                                color: 0xee3333,
+                                author: authorData
+                            });
                             break;
                     }
                 })();
             } else {
-                sendEmbed(message, "Promotion Rejected", "Could not identify your Roblox account. Have you verified with RoVer using the ``!verify`` command?", 0xee3333);
+                client.sendEmbed(message, {
+                    title: "Promotion Rejected",
+                    description: "Could not identify your Roblox account. Have you verified with RoVer using the ``!verify`` command?",
+                    color: 0xee3333
+                });
             }
         });
         message.channel.stopTyping();
     } catch (err) {
-        sendEmbed(message, "Network Error", "Request to RoVer API unsuccessful. The RoVer API might be down.", 0xee3333);
+        client.sendEmbed(message, {
+            title: "Network Error",
+            description: "Request to RoVer API unsuccessful. The RoVer API might be down.",
+            color: 0xee3333
+        });
         client.logger.warn(`Error while requesting Roblox account from RoVer API: ${err}`);
         message.channel.stopTyping();
     };

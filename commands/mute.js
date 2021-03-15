@@ -1,17 +1,13 @@
 exports.run = async (client, message, args, level) => {
   message.channel.startTyping();
-  let mutes = message.mentions.members.array;
-  if (mutes.length > 1){
-    message.channel.send(`${client.config.emojis.error} Error: You can only mute one person at a time.`);
-    message.channel.stopTyping();
-    return;
-  }
+  let member = message.mentions.members.first();
 
   // Remove command and mention from args
   args.splice(0, 1);
   args.splice(1, 1);
 
   console.log(args.join());
+  console.log(member.id);
 };
 
 exports.conf = {

@@ -23,7 +23,7 @@ require("./modules/internal/functions.js")(client);
 
 // Set up noblox.js if a robloxCookie is given in the config
 
-if (config.robloxCookie != null && config.robloxCookie != "") { //is there a better way to write this if statement?
+if (config.robloxCookie) {
   roblox.setCookie(config.robloxCookie);
   client.roblox = roblox;
 }
@@ -49,14 +49,19 @@ client.sendEmbed = function(message, options){
     client.logger.warn("You need to specify options to send an embed!");
     return;
   }
+  const embed = new Discord.MessageEmbed();
+  Object.assign(embed, options);
+  message.channel.send(embed);
+}
+
+/*
   const embed = new Discord.MessageEmbed()
       .setTitle(options.title)
       .setDescription(options.description)
       .setColor(options.color)
       .setURL(options.url)
       .setAuthor(options.author.name, options.author.image, options.author.url);
-  message.channel.send(embed);
-}
+*/
 
 const init = async () => {
 
