@@ -1,6 +1,6 @@
 <img src="resources/icon.png" align="right" height="84" />
 
-# Cobalt [![License](https://img.shields.io/github/license/AStainlessSteelSink/cobalt)](https://github.com/the-sink/Cobalt/blob/main/LICENSE) [![discord.js](https://img.shields.io/badge/discord.js-v12.3.1-blue.svg?logo=npm)](https://www.npmjs.com/package/discord.js) [![Issues](https://img.shields.io/github/issues/AStainlessSteelSink/cobalt)](https://github.com/the-sink/Cobalt/issues)
+# Cobalt [![License](https://img.shields.io/github/license/AStainlessSteelSink/cobalt)](https://github.com/the-sink/Cobalt/blob/main/LICENSE) [![discord.js](https://img.shields.io/badge/discord.js-v12.5.1-blue.svg?logo=npm)](https://www.npmjs.com/package/discord.js) [![Issues](https://img.shields.io/github/issues/AStainlessSteelSink/cobalt)](https://github.com/the-sink/Cobalt/issues)
 
 A bot used by the JKR Discord Server, based on the [guidebot framework](https://github.com/AnIdiotsGuide/guidebot) and with code snippets referenced from [woomy](https://github.com/woomyware/woomy).
 
