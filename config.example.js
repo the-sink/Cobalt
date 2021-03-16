@@ -35,7 +35,8 @@ const config = {
   "modules": {
     "serverList": false,
     "restrictedRole": true,
-    "muteHandler": true
+    "muteHandler": true,
+    "ai": true
   },
 
   // Guild channel IDs for certain functionality

@@ -2,8 +2,11 @@ const fetch = require("node-fetch");
 
 exports.run = async (client, message, args, level) => {
     let sessionKey = client.settings.get("inspireSessionKey");
-    if (sessionKey == null){
-      message.channel.send(`${client.config.emojis.error} InspiroBot session key missing! Cannot run this command at the moment.`);
+    if (!client.config.modules.ai){
+      message.channel.send(`${client.config.emojis.error} The AI module is disabled! This command cannot be run.`);
+      return;
+    } else if (sessionKey == null){
+      message.channel.send(`${client.config.emojis.error} InspiroBot session key missing! Cannot run this command at the moment. This may be a bot issue.`);
       return;
     }
     if (message.member.voice.channel) {
@@ -17,7 +20,7 @@ exports.run = async (client, message, args, level) => {
                 });
               message.channel.stopTyping();
           } catch (err) {
-              message.channel.send(`${client.config.emojis.error} An error has occured! InspiroBot may be having issues.`);
+              message.channel.send(`${client.config.emojis.error} An error has occured while attempting to play inspirobot audio!`);
               client.logger.warn(`Error while retrieving/playing InspiroBot audio: ${err}`)
               message.channel.stopTyping();
           };

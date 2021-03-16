@@ -31,6 +31,7 @@
     "moment-duration-format": "^2.3.2",
     "noblox.js": "^4.8.4",
     "node-fetch": "^2.6.1",
+    "node-opus": "^0.3.3",
     "pretty-ms": "^7.0.1",
     "timestring": "^6.0.0"
   }

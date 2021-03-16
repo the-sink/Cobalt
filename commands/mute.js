@@ -17,7 +17,7 @@ exports.run = async (client, message, args, level) => {
       message.channel.send(`Successfully muted \`${client.getFullUsername(member)}\` for \`${input}\`.`);
     }
   } else {
-    message.channel.send("Error: Mute length must be 1 minute or greater!");
+    message.channel.send(`${client.config.emojis.error} Error: Mute length must be 1 minute or greater!`);
   }
 };
 

@@ -1,4 +1,3 @@
-const fetch = require("node-fetch");
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 
@@ -18,16 +17,6 @@ module.exports = async client => {
     client.application = await client.fetchApplication();
     client.application.team ? client.owners.push(...client.application.team.members.keys()) : client.owners.push(client.application.owner.id);
   }, 300000);
-
-  (async () => {
-    try {
-        await fetch('https://inspirobot.me/api?getSessionID=1')
-          .then(res => res.text())
-          .then(body => { client.settings.set('inspireSessionKey', body); });
-    } catch (err) {
-        client.logger.warn(`Unable to retrieve a new session key for the InspiroBot audio command: ${err}`)
-    };
-  })();
 
   const modFiles = await readdir("./modules/");
   let numModules = 0;

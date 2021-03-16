@@ -2,7 +2,7 @@ exports.run = async (client, message, args, level) => {
   let member = message.mentions.members.first();
 
   if (member == null){
-      message.channel.send("You must mention someone to unmute them!");
+      message.channel.send(`${client.config.emojis.error} You must mention someone to unmute them!`);
       return;
   }
 
@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => {
   if (success) {
       message.channel.send(`Successfully unmuted \`${client.getFullUsername(member)}\`!`);
   } else {
-      message.channel.send("Error: Could not unmute that user.");
+      message.channel.send(`${client.config.emojis.error} Error: Could not unmute that user.`);
   }
 };
 

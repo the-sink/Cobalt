@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => {
   let member = message.mentions.members.first();
 
   if (member == null){
-    message.channel.send("You must mention someone to check them!");
+    message.channel.send(`${client.config.emojis.error} You must mention someone to check them!`);
     return;
   }
 
@@ -14,7 +14,7 @@ exports.run = async (client, message, args, level) => {
   if (length != null) {
     message.channel.send(`Remaning time until \`${client.getFullUsername(member)}\` is unmuted: \`${prettyMs(Math.round(length / 1000) * 1000).replace(/\s/g, "")}\`.`);
   } else {
-    message.channel.send("That user is not muted!");
+    message.channel.send(`${client.config.emojis.error} That user is not muted!`);
   }
 };
 
