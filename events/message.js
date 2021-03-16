@@ -5,7 +5,7 @@ module.exports = async (client, message) => {
   const settings = message.settings = client.config;
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
   if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix on this guild is \`${settings.prefix}\``);
+    return message.reply(`My prefix is \`${settings.prefix}\`!`);
   }
 
   if (message.content.indexOf(settings.prefix) !== 0) return;
