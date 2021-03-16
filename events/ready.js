@@ -11,6 +11,7 @@ module.exports = async client => {
   // its description, owner(s), etc. Used for the dashboard among other things.
   // Updated every 5 minutes.
   client.application = await client.fetchApplication();
+  client.guild = await client.guilds.fetch(client.config.guildID);
   if (client.owners.length < 1) client.application.team ? client.owners.push(...client.application.team.members.keys()) : client.owners.push(client.application.owner.id);
   setInterval( async () => {
     client.owners = [];

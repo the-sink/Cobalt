@@ -1,13 +1,24 @@
+const timestring = require('timestring');
+
 exports.run = async (client, message, args, level) => {
-  message.channel.startTyping();
   let member = message.mentions.members.first();
 
   // Remove command and mention from args
   args.splice(0, 1);
   args.splice(1, 1);
 
-  console.log(args.join());
-  console.log(member.id);
+  let input = args.join().replace(/\s/g, "");
+  let length = timestring(input)*1000;
+  if (length >= 60000){
+    let unmuteTime = Date.now() + length;
+
+    let success = client.mute(member, unmuteTime);
+    if (success){
+      message.channel.send(`Successfully muted \`${client.getFullUsername(member)}\` for \`${input}\`.`);
+    }
+  } else {
+    message.channel.send("Error: Mute length must be 1 minute or greater!");
+  }
 };
 
 exports.conf = {

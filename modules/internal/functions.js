@@ -111,6 +111,10 @@ module.exports = (client) => {
     return false;
   };
 
+  client.getFullUsername = (member) => {
+    return `${member.user.username}#${member.user.discriminator}`;
+  };
+
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
   
   // EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds this

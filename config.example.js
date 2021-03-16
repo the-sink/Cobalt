@@ -6,13 +6,16 @@ const config = {
   // The prefix you must place before a command for it to be registered by the bot (such as "~command" vs "!command")
   "prefix": "-",
 
+  // The guild ID the bot is operating in.
+  "guildID": "000000000000000000",
+
   // Bot Owner, level 10 by default. A User ID. Should never be anything else than the bot owner's ID.
   "ownerID": "",
 
   // Bot Admins, level 9 by default. Array of user ID strings.
   "admins": [],
 
-  // Bot Support, level 8 by default. Array of user ID strings
+  // Bot Support, level 8 by default. Array of user ID strings.
   "support": [],
 
   ///// The following are secrets, do not share these with anyone! /////
@@ -31,7 +34,8 @@ const config = {
   // List of modules that can be enabled/disabled
   "modules": {
     "serverList": false,
-    "restrictedRole": true
+    "restrictedRole": true,
+    "muteHandler": true
   },
 
   // Guild channel IDs for certain functionality
