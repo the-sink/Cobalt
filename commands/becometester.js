@@ -1,16 +1,6 @@
 const fetch = require("node-fetch");
 const Discord = require("discord.js");
 
-function sendEmbed(message, title, description, color, url, author, footer){
-    const embed = new Discord.MessageEmbed()
-        .setTitle(title)
-        .setDescription(description)
-        .setColor(color);
-    if (url) embed.setURL(url);
-    if (author) embed.setAuthor(author.name, author.image, author.url);
-    message.channel.send(embed);
-}
-
 exports.run = async (client, message, args, level) => {
     if (client.roblox == null){
         client.sendEmbed(message, {
@@ -74,7 +64,8 @@ exports.run = async (client, message, args, level) => {
                                 title: "Promotion Rejected",
                                 description: "You are already a Project Tester or higher in JKR!",
                                 color: 0xee3333,
-                                author: authorData
+                                author: authorData,
+                                footer: "e"
                             });
                             break;
                     }

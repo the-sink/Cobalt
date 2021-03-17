@@ -51,6 +51,12 @@ client.sendEmbed = function(message, options){
   }
   const embed = new Discord.MessageEmbed();
   Object.assign(embed, options);
+  if (options.author) {
+    embed.setAuthor(options.author.name, options.author.image, options.author.url)
+  }
+  if (options.footer) {
+    embed.setFooter(options.footer);
+  }
   message.channel.send(embed);
 }
 
