@@ -3,7 +3,7 @@ const readdir = promisify(require("fs").readdir);
 
 module.exports = async client => {
   // Log that the bot is online.
-  client.logger.log(`${client.user.tag}, ready to serve ${client.users.cache.size} users in ${client.guilds.cache.size} servers.`, "ready");
+  client.logger.log(`${client.user.tag}, ready to serve ${client.users.cache.size} users.`, "ready");
   
   // This loop ensures that client.application always contains up to date data
   // about the app's status. This includes whether the bot is public or not,

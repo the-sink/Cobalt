@@ -9,9 +9,6 @@ const config = {
   // The guild ID the bot is operating in.
   "guildID": "000000000000000000",
 
-  // Bot Owner, level 10 by default. A User ID. Should never be anything else than the bot owner's ID.
-  "ownerID": "",
-
   // Bot Admins, level 9 by default. Array of user ID strings.
   "admins": [],
 
@@ -99,13 +96,6 @@ const config = {
           return false;
         }
       }
-    },
-    // This is the server owner.
-    { level: 4,
-      name: "Server Owner", 
-      // Simple check, if the guild owner id matches the message author's ID, then it will return true.
-      // Otherwise it will return false.
-      check: (message) => message.channel.type === "text" ? (message.guild.ownerID === message.author.id ? true : false) : false
     },
 
     // Bot Admin has some limited access like rebooting the bot or reloading commands.
