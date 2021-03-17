@@ -64,8 +64,7 @@ exports.run = async (client, message, args, level) => {
                                 title: "Promotion Rejected",
                                 description: "You are already a Project Tester or higher in JKR!",
                                 color: 0xee3333,
-                                author: authorData,
-                                footer: "e"
+                                author: authorData
                             });
                             break;
                     }
