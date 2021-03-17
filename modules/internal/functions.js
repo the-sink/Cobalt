@@ -66,7 +66,8 @@ module.exports = (client) => {
     text = text
       .replace(/`/g, "`" + String.fromCharCode(8203))
       .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.token, "[token]");
+      .split(process.cwd()).join("")
+      .split(client.token).join("[token]");
 
     return text;
   };
