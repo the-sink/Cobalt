@@ -15,9 +15,6 @@ const config = {
   // Bot Admins, level 9 by default. Array of user ID strings.
   "admins": [],
 
-  // Bot Support, level 8 by default. Array of user ID strings.
-  "support": [],
-
   ///// The following are secrets, do not share these with anyone! /////
 
   // Your Bot's Token. Available on https://discord.com/developers/applications/me
@@ -109,15 +106,6 @@ const config = {
       // Simple check, if the guild owner id matches the message author's ID, then it will return true.
       // Otherwise it will return false.
       check: (message) => message.channel.type === "text" ? (message.guild.ownerID === message.author.id ? true : false) : false
-    },
-
-    // Bot Support is a special inbetween level that has the equivalent of server owner access
-    // to any server they joins, in order to help troubleshoot the bot on behalf of owners.
-    { level: 8,
-      name: "Bot Support",
-      // The check is by reading if an ID is part of this array. Yes, this means you need to
-      // change this and reboot the bot to add a support user. Make it better yourself!
-      check: (message) => config.support.includes(message.author.id)
     },
 
     // Bot Admin has some limited access like rebooting the bot or reloading commands.
