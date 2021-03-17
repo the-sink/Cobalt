@@ -67,7 +67,7 @@ module.exports = (client) => {
       .replace(/`/g, "`" + String.fromCharCode(8203))
       .replace(/@/g, "@" + String.fromCharCode(8203))
       .split(process.cwd()).join("")
-      .split(client.token).join("[token]");
+      .split(client.token).join("mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
 
     return text;
   };

@@ -128,7 +128,8 @@ module.exports = (client) => {
             try {
                 json = JSON.parse(data);
             } catch(e) {
-                return; // malformed or non-json data, logging this is probably unneccesary
+                sendResponse(res, 200, "Success"); // malformed or request is being sent to check if server is online, send success and ignore it
+                return;
             }
             // Make sure the provided auth key is correct, and set up a response
             if (json.authKey == null || json.authKey != key){
