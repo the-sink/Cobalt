@@ -1,4 +1,9 @@
 module.exports = async (client) => {
+    if (client.guild == null){
+        client.logger.warn("Could not start up mute system, guild was not found.");
+        return;
+    }
+
     client.mutedRole = client.guild.roles.cache.find(role => role.name === "Muted");
 
     client.mute = function(member, unmuteTime){
