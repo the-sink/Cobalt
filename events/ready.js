@@ -1,5 +1,4 @@
-const { promisify } = require("util");
-const readdir = promisify(require("fs").readdir);
+const readdir = require("fs").promises.readdir;
 
 module.exports = async client => {
   // Log that the bot is online.

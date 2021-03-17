@@ -2,20 +2,12 @@ if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 1
 if (process.env.npm_package_version == null) throw new Error("Bot must be run using npm for package-related metadata. Please use \"npm start\" to launch the bot.");
 
 const Discord = require("discord.js");
-const { promisify } = require("util");
-const readdir = promisify(require("fs").readdir);
+const readdir = require("fs").promises.readdir;
 const Enmap = require("enmap");
 const roblox = require("noblox.js");
 const config = require("./config.js");
 
-const client = new Discord.Client({ ws: { intents: [
-  'GUILDS',
-  'GUILD_MEMBERS',
-  'GUILD_EMOJIS',
-  'GUILD_VOICE_STATES',
-  'GUILD_MESSAGES',
-  'DIRECT_MESSAGES'
-]}});
+const client = new Discord.Client();
 
 client.config = config;
 client.logger = require("./modules/internal/logger.js");
