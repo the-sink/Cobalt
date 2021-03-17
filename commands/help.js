@@ -3,6 +3,7 @@ exports.run = (client, message, args, level) => {
     const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
 
     const commandNames = myCommands.keyArray();
+    const keywords = client.responses;
     const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
     let currentCategory = "";
@@ -16,6 +17,7 @@ exports.run = (client, message, args, level) => {
       }
       output += `${message.settings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
     });
+    output += `\nAvailable keywords:: ${Object.keys(keywords).join(", ")}`;
     message.channel.send(output, {code: "asciidoc", split: { char: "\u200b" }});
   } else { // Show individual command
     let command = args[0];
