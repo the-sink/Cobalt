@@ -8,7 +8,11 @@ exports.run = async (client, message, args, level) => {
   args.splice(1, 1);
 
   let input = args.join().replace(/\s/g, "");
-  let length = timestring(input)*1000;
+  try {
+    let length = timestring(input)*1000;
+  } catch(e) {
+    message.channel.send(`${client.config.emojis.error} Error: Command unsuccessful. Did you use the proper syntax? (run \`-help mute\`)`)
+  }
   if (length >= 60000){
     let unmuteTime = Date.now() + length;
 

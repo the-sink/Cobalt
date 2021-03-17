@@ -22,7 +22,12 @@ exports.run = (client, message, args, level) => {
     if (client.commands.has(command)) {
       command = client.commands.get(command);
       if (level < client.levelCache[command.conf.permLevel]) return;
-      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {code:"asciidoc"});
+      let str = `= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\n`;
+      if (command.conf.aliases.length > 0) { // Only show this row if the command has 1 or more aliases
+        str += `aliases:: ${command.conf.aliases.join(", ")}\n`;
+      }
+      str += `= ${command.help.name} =`;
+      message.channel.send(str, {code:"asciidoc"});
     }
   }
 };

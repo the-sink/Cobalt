@@ -1,6 +1,6 @@
 module.exports = async (client, message) => {
   if (message.author.bot) return;
-  if (client.inspectRestricted(message)){return;}
+  if (client.inspectRestricted != null && client.inspectRestricted(message)){return;}
 
   const settings = message.settings = client.config;
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
