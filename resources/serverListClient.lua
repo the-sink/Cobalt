@@ -6,6 +6,7 @@ local ServerKey = tostring(random:NextInteger(10000000, 99999999)) -- awful and 
 local AuthKey = "" -- Replace with the server key in the bot's config
 local PostUrl = "" -- The URL to POST to when sending server list-related data
 local branch = (game.PlaceId == 452710513 and "Development") or "Release" -- Indicates release or development branch, this functionality is specific to CVRF
+local private = game.PrivateServerOwnerId ~= 0 and branch == "Release"
 
 local function GenerateInfo(body)
   return {
@@ -19,12 +20,10 @@ local function GenerateInfo(body)
 end
 
 local function PlayerSignal(player, action)
-  http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, action = action, playerName = (private and "private") or player.Name}))  
+  http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, action = action, playerName = (private and "(Private)") or player.Name}))  
 end
 
 if RunService:IsStudio() then return end -- Don't send server list data when in studio
-
-local private = game.PrivateServerOwnerId ~= 0
 
 http:RequestAsync(GenerateInfo({authKey = AuthKey, serverKey = ServerKey, action = "start", branch = branch, private = private}))
 wait(1)
