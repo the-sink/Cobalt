@@ -8,17 +8,19 @@ exports.run = async (client, message, args, level) => {
   args.splice(1, 1);
 
   let input = args.join().replace(/\s/g, "");
+  let length;
   try {
-    let length = timestring(input)*1000;
+    length = timestring(input)*1000;
   } catch(e) {
-    message.channel.send(`${client.config.emojis.error} Error: Command unsuccessful. Did you use the proper syntax? (run \`-help mute\`)`)
+    message.channel.send(`${client.config.emojis.error} Error: Command unsuccessful. Did you use the proper syntax? (run \`-help mute\`)`);
+    return;
   }
   if (length >= 60000){
     let unmuteTime = Date.now() + length;
 
     let success = client.mute(member, unmuteTime);
     if (success){
-      message.channel.send(`Successfully muted \`${client.getFullUsername(member)}\` for \`${input}\`.`);
+      message.channel.send(`:white_check_mark: Successfully muted \`${client.getFullUsername(member)}\` for \`${input}\`.`);
     }
   } else {
     message.channel.send(`${client.config.emojis.error} Error: Mute length must be 1 minute or greater!`);

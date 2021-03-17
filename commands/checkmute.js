@@ -12,7 +12,7 @@ exports.run = async (client, message, args, level) => {
   let length = client.getRemainingMuteLength(member);
  
   if (length != null) {
-    message.channel.send(`Remaning time until \`${client.getFullUsername(member)}\` is unmuted: \`${prettyMs(Math.round(length / 1000) * 1000).replace(/\s/g, "")}\`.`);
+    message.channel.send(`:alarm_clock: Remaning time until \`${client.getFullUsername(member)}\` is unmuted: \`${prettyMs(Math.round(length / 1000) * 1000).replace(/\s/g, "")}\`.`);
   } else {
     message.channel.send(`${client.config.emojis.error} That user is not muted!`);
   }

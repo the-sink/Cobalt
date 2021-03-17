@@ -9,7 +9,7 @@ exports.run = async (client, message, args, level) => {
   let success = client.unmute(member);
   
   if (success) {
-      message.channel.send(`Successfully unmuted \`${client.getFullUsername(member)}\`!`);
+      message.channel.send(`:white_check_mark: Successfully unmuted \`${client.getFullUsername(member)}\`!`);
   } else {
       message.channel.send(`${client.config.emojis.error} Error: Could not unmute that user.`);
   }
