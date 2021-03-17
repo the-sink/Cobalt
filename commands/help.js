@@ -17,7 +17,7 @@ exports.run = (client, message, args, level) => {
       }
       output += `${message.settings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
     });
-    output += `\nAvailable keywords:: ${Object.keys(keywords).join(", ")}`;
+    output += `\nAvailable info commands :: ${Object.keys(keywords).join(", ")}`;
     message.channel.send(output, {code: "asciidoc", split: { char: "\u200b" }});
   } else { // Show individual command
     let command = args[0];
