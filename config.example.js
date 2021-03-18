@@ -6,9 +6,6 @@ const config = {
   // The prefix you must place before a command for it to be registered by the bot (such as "~command" vs "!command")
   "prefix": "-",
 
-  // The guild ID the bot is operating in.
-  "guildID": "000000000000000000",
-
   // Bot Admins, level 9 by default. Array of user ID strings.
   "admins": [],
 

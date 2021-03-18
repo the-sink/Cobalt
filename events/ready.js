@@ -10,7 +10,7 @@ module.exports = async client => {
   // Updated every 5 minutes.
   client.application = await client.fetchApplication();
   try {
-    client.guild = await client.guilds.fetch(client.config.guildID);
+    client.guild = await client.guilds.cache.first();
   } catch(e) {
     client.logger.warn(`Could not fetch guild with error: ${e}`);
   }
