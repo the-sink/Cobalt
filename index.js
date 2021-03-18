@@ -1,4 +1,3 @@
-if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 12.0.0 or higher is required. Update Node on your system.");
 if (process.env.npm_package_version == null) throw new Error("Bot must be run using npm for package-related metadata. Please use \"npm start\" to launch the bot.");
 
 const Discord = require("discord.js");
