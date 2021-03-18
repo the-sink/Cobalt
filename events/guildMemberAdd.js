@@ -12,16 +12,16 @@ module.exports = async (client, member) => {
   if (channel) {
     try {
       await fetch(`https://verify.eryn.io/api/user/${member.id}`)
-      .then(res => res.json())
-      .then(body => {
-          if (body.status == "ok"){ // Successfully obtained Roblox account
-            let name = body.robloxUsername;
-            let id = body.robloxId;
-            channel.send(`\`${client.getFullUsername(member)}\` (\`${name} / ${id}\`) has joined the server.`);
-          } else {
-            channel.send(`\`${client.getFullUsername(member)}\` has joined the server. They are not yet verified`);
-          }
-      });
+        .then(res => res.json())
+        .then(body => {
+            if (body.status == "ok"){ // Successfully obtained Roblox account
+              let name = body.robloxUsername;
+              let id = body.robloxId;
+              channel.send(`\`${client.getFullUsername(member)}\` (\`${name} / ${id}\`) has joined the server.`);
+            } else {
+              channel.send(`\`${client.getFullUsername(member)}\` has joined the server. They are not yet verified`);
+            }
+        });
     } catch(e) {
       client.logger.warn(`Error while checking for user's account association: ${e}`);
     }
