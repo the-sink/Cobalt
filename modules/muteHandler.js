@@ -7,7 +7,9 @@ module.exports = async (client) => {
     client.mutedRole = client.guild.roles.cache.find(role => role.name === "Muted");
 
     client.mute = function(member, unmuteTime){
-        client.mutes.set(member.id, unmuteTime);
+        if (unmuteTime) {
+            client.mutes.set(member.id, unmuteTime);
+        }
         member.roles.add(client.mutedRole).catch(client.logger.warn);
         return true;
     }
