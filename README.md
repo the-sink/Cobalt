@@ -6,7 +6,7 @@ A bot used by the JKR Discord Server, based on the [guidebot framework](https://
 
 Feel free to look around. If you find any issues or would like to make improvements to this bot, go ahead! Although this bot isn't *specifically* intended to be used outside of JKR, it's intentionally open source so others can contribute if they'd like.
 
-As mentoned above, this bot is **NOT** designed to be run on more than one server. You could probably modify it fairly easily to run on multiple, but in its native state is intended only to be run on one.
+Please keep in mind, this bot is **NOT** designed to be run on more than one server. You could probably modify it fairly easily to run on multiple, but in its native state is intended only to be run on one server as this is all that's needed for the JKR Discord.
 
 ## Requirements
 
