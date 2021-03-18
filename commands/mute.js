@@ -1,6 +1,6 @@
 const timestring = require('timestring');
 
-function muteMember(member, unmuteTime) {
+function muteMember(client, member, unmuteTime) {
   let success = client.mute(member, unmuteTime);
   if (success){
     let message = `:white_check_mark: Successfully muted \`${client.getFullUsername(member)}\``;
@@ -29,12 +29,12 @@ exports.run = async (client, message, args, level) => {
       return;
     }
     if (length >= 60000){
-      muteMember(member, Date.now() + length);
+      muteMember(client, member, Date.now() + length);
     } else {
       message.channel.send(`${client.config.emojis.error} Error: Mute length must be 1 minute or greater!`);
     }
   } else {
-    muteMember(member);
+    muteMember(client, member);
   }
 };
 
