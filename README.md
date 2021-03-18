@@ -10,7 +10,7 @@ Also, it's in Discord.js instead of Eris - considering this bot is only intended
 
 Feel free to look around. If you find any issues or would like to make improvements to this bot, go ahead! Although this bot isn't *specifically* intended to be used outside of JKR, it's intentionally open source so others can contribute if they'd like.
 
-As mentoned above, this bot is **NOT** designed to be run on more than one server. You could probably modify it fairly easily to run on multiple, but in its native state is intended only to be run on one and a `guildID` needs to be assigned in your config before certain things like the mute system will work.
+As mentoned above, this bot is **NOT** designed to be run on more than one server. You could probably modify it fairly easily to run on multiple, but in its native state is intended only to be run on one.
 
 ## Requirements
 
