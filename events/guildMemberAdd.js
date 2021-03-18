@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-module.exports = (client, member) => {
+module.exports = async (client, member) => {
   let channel = client.config.channels.logChannel;
 
   // Re-mute user if they rejoin while still muted
