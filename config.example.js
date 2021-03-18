@@ -32,7 +32,8 @@ const config = {
 
   // Guild channel IDs for certain functionality
   "channels": {
-    "serverList": ""
+    "serverList": "",
+    "logChannel": ""
   },
 
   // API endpoints, needed for some commands
