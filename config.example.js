@@ -27,7 +27,8 @@ const config = {
     "serverList": false,
     "restrictedRole": true,
     "muteHandler": true,
-    "ai": true
+    "ai": true,
+    "finance": true
   },
 
   // Guild channel IDs for certain functionality

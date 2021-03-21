@@ -1,6 +1,6 @@
 {
   "name": "cobalt",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "An updated version of the JKR Discord's \"Cobalt\" bot, built on the framework of guidebot.",
   "main": "index.js",
   "scripts": {
@@ -26,13 +26,13 @@
     "chalk": "^4.1.0",
     "discord.js": "^12.5.1",
     "enmap": "^5.8.4",
-    "finnhub": "^1.2.1",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "noblox.js": "^4.8.4",
     "node-fetch": "^2.6.1",
     "node-opus": "^0.3.3",
     "pretty-ms": "^7.0.1",
-    "timestring": "^6.0.0"
+    "timestring": "^6.0.0",
+    "yahoo-finance": "^0.3.7"
   }
 }
