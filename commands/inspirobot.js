@@ -24,7 +24,7 @@ exports.conf = {
 
 exports.help = {
   name: "inspirobot",
-  category: "Fun",
+  category: "AI",
   description: "Posts an InspiroBot image with an \"inspirational\" quote.",
   usage: "inspirobot"
 };

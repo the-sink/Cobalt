@@ -42,7 +42,7 @@ exports.conf = {
 
 exports.help = {
   name: "audioinspire",
-  category: "Audio",
+  category: "AI",
   description: "Streams \"inspirational\" quotes for a minute or two to the voice channel you're in. Might decide to tell a story, who knows.",
   usage: "audioinspire"
 };
