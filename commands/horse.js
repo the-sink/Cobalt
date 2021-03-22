@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 exports.run = async (client, message, args, level) => {
   message.channel.startTyping();
-  const image = await fetch("https://thiscatdoesnotexist.com/");
+  const image = await fetch("https://thishorsedoesnotexist.com/");
   message.channel.send({files: [new Discord.MessageAttachment(image.body)]});
   message.channel.stopTyping();
 };
@@ -16,8 +16,8 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "cat",
+  name: "horse",
   category: "AI",
-  description: "Posts a randomly generated cat from https://thiscatdoesnotexist.com/",
-  usage: "cat"
+  description: "Posts a randomly generated horse from https://thishorsedoesnotexist.com/",
+  usage: "horse"
 };
