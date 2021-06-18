@@ -112,7 +112,7 @@ module.exports = (client) => {
         limit: 20
     }).then((messages) => {
         let listMessages = [];
-        messages.filter(message => message.author.id === client.user.id).forEach(message => listMessages.push(message));
+        messages.filter(message => message.author.id === client.user.id && message.id != 851578736155295814).forEach(message => listMessages.push(message));
         channel.bulkDelete(listMessages);
     })
 
