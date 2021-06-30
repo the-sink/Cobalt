@@ -28,7 +28,8 @@ const config = {
     "restrictedRole": true,
     "muteHandler": true,
     "ai": true,
-    "finance": true
+    "finance": true,
+    "playerCount": true
   },
 
   // Guild channel IDs for certain functionality
