@@ -17,7 +17,6 @@ module.exports = async (client) => {
             await fetch('https://games.roblox.com/v1/games?universeIds=105407262')
                 .then(res => res.json())
                 .then(body => {info = body.data[0]});
-            console.log(info);
             if (channel !== undefined){
                 channel.setTopic(`${info.playing} online players | ${numberWithCommas(info.visits)} total visits`)
             }
