@@ -7,7 +7,7 @@ module.exports = async client => {
   // This loop ensures that client.application always contains up to date data
   // about the app's status. This includes whether the bot is public or not,
   // its description, owner(s), etc. Used for the dashboard among other things.
-  // Updated every 5 minutes.
+  // Updated every 10 minutes.
   client.application = await client.fetchApplication();
   try {
     client.guild = await client.guilds.cache.first();
@@ -19,7 +19,7 @@ module.exports = async client => {
     client.owners = [];
     client.application = await client.fetchApplication();
     client.application.team ? client.owners.push(...client.application.team.members.keys()) : client.owners.push(client.application.owner.id);
-  }, 300000);
+  }, 600000);
 
   const modFiles = await readdir("./modules/");
   let numModules = 0;
