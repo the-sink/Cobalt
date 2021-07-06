@@ -1,3 +1,5 @@
+const markov = require("../modules/markov");
+
 module.exports = async (client, message) => {
   if (message.author.bot) return;
   if (client.inspectRestricted != null && client.inspectRestricted(message)){return;}
@@ -6,6 +8,15 @@ module.exports = async (client, message) => {
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
   if (message.content.match(prefixMention)) {
     return message.reply(`My prefix is \`${settings.prefix}\`!`);
+  }
+  if (client.markov !== undefined) {
+    var n = client.markov.getStates().length;
+    client.markov.addStates(message.content);
+    if (n >= 50){
+      client.markov.train();
+      message.channel.send(client.markov.generateRandom());
+      client.markov.clearState();
+    }
   }
 
   if (message.content.indexOf(settings.prefix) !== 0) return;

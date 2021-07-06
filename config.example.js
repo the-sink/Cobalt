@@ -29,7 +29,8 @@ const config = {
     "muteHandler": true,
     "ai": true,
     "finance": true,
-    "playerCount": true
+    "playerCount": true,
+    "markov": true
   },
 
   // Guild channel IDs for certain functionality
