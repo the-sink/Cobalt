@@ -9,7 +9,9 @@ module.exports = async (client, message) => {
   if (message.content.match(prefixMention)) {
     return message.reply(`My prefix is \`${settings.prefix}\`!`);
   }
-  if (client.markov !== undefined) {
+
+  if (message.content.indexOf(settings.prefix) !== 0 && client.markov !== undefined) {
+    console.log(message.content);
     var n = client.markov.getStates().length;
     client.markov.addStates(message.content);
     if (n >= 50){
