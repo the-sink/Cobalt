@@ -15,7 +15,7 @@ module.exports = async (client, message) => {
     client.markov.addStates(message.content);
     if (n >= client.config.markovLength){
       client.markov.train();
-      message.channel.send(client.markov.generateRandom());
+      message.channel.send(client.markov.generateRandom(Math.floor(Math.random() * client.config.markovCharacterLimit)));
       client.markov.clearState();
     }
   }
