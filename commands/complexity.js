@@ -1,6 +1,7 @@
 exports.run = async (client, message, args, level) => {
     if (client.markov === undefined) {message.channel.send("The Markov module is not enabled!"); return;}
     message.channel.send("Markov chain complexity (# possibilities): " + Object.keys(client.markov.getPossibilities()).length);
+    message.channel.send("Number of states (messages added to the chain): " + client.markov.getStates().length);
   };
   
   exports.conf = {
