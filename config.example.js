@@ -49,6 +49,8 @@ const config = {
 
   "serverListPort": 2572,
 
+  "markovLength": 50, //  number of messages before the bot speaks from the markov chain, higher will take longer but may be more accurate/random
+
   "modRole": "Moderator",
   "adminRole": "Administrator",
 
