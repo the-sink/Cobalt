@@ -11,12 +11,11 @@ module.exports = async (client, message) => {
   }
 
   if (message.content.indexOf(settings.prefix) !== 0 && client.markov !== undefined) {
-    var n = client.markov.getStates().length;
-    client.markov.addStates(message.content);
-    if (n >= client.config.markovLength){
-      client.markov.train();
-      message.channel.send(client.markov.generateRandom(Math.floor(Math.random() * client.config.markovCharacterLimit)));
-      client.markov.clearState();
+    var obj = client.markov.parse(message.content);
+    client.markov.numMessages++;
+    if (client.markov.numMessages >= client.config.markovMessages){
+      client.markov.numMessages = 0;
+      message.channel.send(obj.end(client.markov.markovLength).process());
     }
   }
 

@@ -1,7 +1,7 @@
-const Markov = require("js-markov");
-var markov = new Markov();
+const MarkovChain = require("markovchain");
+var markov = new MarkovChain('');
 
 module.exports = async (client) => {
     client.markov = markov;
-    console.log(typeof(client.markov));
+    client.markov.numMessages = 0;
 };
