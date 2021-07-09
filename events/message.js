@@ -1,5 +1,3 @@
-const markov = require("../modules/markov");
-
 module.exports = async (client, message) => {
   if (message.author.bot) return;
   if (client.inspectRestricted != null && client.inspectRestricted(message)){return;}
