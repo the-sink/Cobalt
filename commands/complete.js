@@ -21,7 +21,7 @@ exports.run = async (client, message, args, level) => {
                         running = false;
                         if (res.ok) {
                             var text = await res.text();
-                            var response = `<@${message.author.id}>, ` + str + text;
+                            var response = `<@${message.author.id}>, ` + str + text.replace("<|endoftext|>", " ");
                             msg.edit(response.substring(0, 1999));
                         } else {
                             throw 'Server error';
