@@ -17,7 +17,7 @@ exports.run = async (client, message, args, level) => {
                         body:    str,
                         headers: { 'Content-Type': 'text/plain' },
                     })
-                    .then(async function(text){
+                    .then(async function(res){
                         running = false;
                         if (res.ok) {
                             var text = await res.text();
