@@ -31,7 +31,11 @@ exports.run = async (client, message, args, level) => {
                     .catch(err => {
                         running = false;
                         console.log(err);
-                        msg.edit(`<@${message.author.id}>, an error has occurred fetching the response.`);
+                        if (err.code == "ECONNREFUSED") {
+                            msg.edit(`<@${message.author.id}>, the gpt-2 server is currently offline. It may be undergoing maintenance or has crashed.`);
+                        } else {
+                            msg.edit(`<@${message.author.id}>, an error has occurred fetching the response.`);
+                        }
                     });
             } catch(err){
                 running = false;
