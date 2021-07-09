@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => {
         return;
     }
     var str = message.content.replace(`${client.config.prefix}complete `, "").replace(`${client.config.prefix}continue `, "");
-    message.reply("<a:loading:776537774391164949> Completing your prompt (this will probably take around 2 minutes)...")
+    message.reply("<a:loading:776537774391164949> Completing your prompt (this will probably take around 1 ½ minutes)...")
         .then(msg => {
             running = true;
             try {
