@@ -100,6 +100,9 @@ const init = async () => {
 process.on('SIGINT', function(){
   client.logger.log("Disconnecting...")
   client.destroy();
+  if (client.markov !== undefined) {
+    client.markov.save();
+  }
   process.exit();
 });
 

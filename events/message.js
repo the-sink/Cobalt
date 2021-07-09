@@ -10,15 +10,6 @@ module.exports = async (client, message) => {
     return message.reply(`My prefix is \`${settings.prefix}\`!`);
   }
 
-  if (message.content.indexOf(settings.prefix) !== 0 && client.markov !== undefined) {
-    var obj = client.markov.parse(message.content);
-    client.markov.numMessages++;
-    if (client.markov.numMessages >= client.config.markovMessages){
-      client.markov.numMessages = 0;
-      message.channel.send(obj.end(client.markov.markovLength).process());
-    }
-  }
-
   if (message.content.indexOf(settings.prefix) !== 0) return;
 
   const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
