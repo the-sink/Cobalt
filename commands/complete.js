@@ -21,8 +21,9 @@ exports.run = async (client, message, args, level) => {
                         running = false;
                         if (res.ok) {
                             var text = await res.text();
-                            var response = `<@${message.author.id}>, ` + str + text.replace("<|endoftext|>", " ");
-                            msg.edit(response.substring(0, 1999));
+                            var response = str + text.replace("<|endoftext|>", " "); // `<@${message.author.id}>, ` + 
+                            msg.delete();
+                            message.reply(response.substring(0, 1999));
                         } else {
                             running = false;
                             msg.edit(`<@${message.author.id}>, an error has occurred generating the rest of that prompt.`);
@@ -55,6 +56,6 @@ exports.conf = {
 exports.help = {
   name: "complete",
   category: "AI",
-  description: "Completes a given prompt using GPT-2. This command takes a little while to execute.",
+  description: "Completes a given prompt using GPT-2. This command is also known as \"the shitpost creator\".",
   usage: "complete This morning Donald Trump tweeted about "
 };
