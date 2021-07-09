@@ -29,8 +29,7 @@ const config = {
     "muteHandler": true,
     "ai": true,
     "finance": true,
-    "playerCount": true,
-    "markov": true
+    "playerCount": true
   },
 
   // Guild channel IDs for certain functionality
@@ -48,9 +47,6 @@ const config = {
   },
 
   "serverListPort": 2572,
-
-  "markovLength": 50,
-  "markovMessages": 10,
 
   "modRole": "Moderator",
   "adminRole": "Administrator",
