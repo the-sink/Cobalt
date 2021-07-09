@@ -17,10 +17,10 @@ exports.run = async (client, message, args, level) => {
                         body:    str,
                         headers: { 'Content-Type': 'text/plain' },
                     })
-                    .then(res => {
+                    .then(async function(text){
                         running = false;
                         if (res.ok) {
-                            var text = res.text();
+                            var text = await res.text();
                             var response = `<@${message.author.id}>, ` + str + text;
                             msg.edit(response.substring(0, 1999));
                         } else {
