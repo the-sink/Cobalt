@@ -3,9 +3,14 @@ const fs = require("fs");
 var running = false;
 
 exports.run = async (client, message, args, level) => {
+    if (running) {
+        message.reply("the bot is already running a completion task! Please wait for it to finish first.");
+        return;
+    }
     var str = message.content.replace(`${client.config.prefix}complete `, "");
     message.reply("<a:loading:776537774391164949> Completing your prompt (this will probably take around 2 minutes)...")
         .then(msg => {
+            running = true;
             try {
                 fetch('http://192.168.1.92:7001', {
                         method: 'post',
@@ -13,13 +18,11 @@ exports.run = async (client, message, args, level) => {
                         headers: { 'Content-Type': 'text/plain' },
                     })
                     .then(res => {
+                        running = false;
                         if (res.ok) {
                             var text = res.text();
                             var response = `<@${message.author.id}>, ` + str + text;
                             msg.edit(response.substring(0, 1999));
-                        } else if (res.status == 409) {
-                            running = false;
-                            msg.edit(`<@${message.author.id}>, the bot is already running a completion task! Please wait for it to finish first.`);
                         } else {
                             throw 'Server error';
                         }
