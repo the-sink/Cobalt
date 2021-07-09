@@ -26,6 +26,9 @@ exports.run = async (client, message, args, level) => {
                         } else {
                             throw 'Server error';
                         }
+                    })
+                    .catch(err => {
+                        throw 'Fetch error';
                     });
             } catch(err){
                 running = false;
