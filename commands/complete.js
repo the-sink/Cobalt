@@ -21,7 +21,7 @@ exports.run = async (client, message, args, level) => {
                         running = false;
                         if (res.ok) {
                             var text = await res.text();
-                            var response = await client.clean(str + text.replace("<|endoftext|>", " ")); // `<@${message.author.id}>, ` + 
+                            var response = await client.clean(client, str + text.replace("<|endoftext|>", " ")); // `<@${message.author.id}>, ` + 
                             msg.delete();
                             message.reply(response.substring(0, 1900)).catch(err => {
                                 running = false;
