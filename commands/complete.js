@@ -23,7 +23,7 @@ exports.run = async (client, message, args, level) => {
                             var text = await res.text();
                             var response = str + text.replace("<|endoftext|>", " "); // `<@${message.author.id}>, ` + 
                             msg.delete();
-                            message.reply(response.substring(0, 1999));
+                            message.reply(response.substring(0, 1990));
                         } else {
                             running = false;
                             msg.edit(`<@${message.author.id}>, an error has occurred generating the rest of that prompt.`);
