@@ -24,15 +24,19 @@ exports.run = async (client, message, args, level) => {
                             var response = `<@${message.author.id}>, ` + str + text.replace("<|endoftext|>", " ");
                             msg.edit(response.substring(0, 1999));
                         } else {
-                            throw 'Server error';
+                            running = false;
+                            msg.edit(`<@${message.author.id}>, an error has occurred generating the rest of that prompt.`);
                         }
                     })
                     .catch(err => {
-                        throw 'Fetch error';
+                        running = false;
+                        console.log(err);
+                        msg.edit(`<@${message.author.id}>, an error has occurred fetching the response.`);
                     });
             } catch(err){
                 running = false;
-                msg.edit(`<@${message.author.id}>, an error occured while executing the completion task. If this keeps happening, something is *probably* wrong.`);
+                console.log(err);
+                msg.edit(`<@${message.author.id}>, a bot error has occured.`);
             }
         });
 };
