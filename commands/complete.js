@@ -7,7 +7,7 @@ exports.run = async (client, message, args, level) => {
         message.reply("the bot is already running a completion task! Please wait for it to finish first.");
         return;
     }
-    var str = message.content.replace(`${client.config.prefix}complete `, "").replace(`${client.config.prefix}continue`, "");
+    var str = message.content.replace(`${client.config.prefix}complete `, "").replace(`${client.config.prefix}continue `, "");
     message.reply("<a:loading:776537774391164949> Completing your prompt (this will probably take around 2 minutes)...")
         .then(msg => {
             running = true;
@@ -21,7 +21,7 @@ exports.run = async (client, message, args, level) => {
                         running = false;
                         if (res.ok) {
                             var text = await res.text();
-                            var response = await client.clean(client, str + text.replace("<|endoftext|>", " ")); // `<@${message.author.id}>, ` + 
+                            var response = await client.clean(client, "```" + str + text.replace("<|endoftext|>", " ") + "```"); // `<@${message.author.id}>, ` + 
                             msg.delete();
                             message.reply(response.substring(0, 1900)).catch(err => {
                                 running = false;
