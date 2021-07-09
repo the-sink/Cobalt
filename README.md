@@ -8,6 +8,8 @@ Feel free to look around. If you find any issues or would like to make improveme
 
 Please keep in mind, this bot is **NOT** designed to be run on more than one server. You could probably modify it fairly easily to run on multiple, but in its native state is intended only to be run on one server as this is all that's needed for the JKR Discord.
 
+[gpt-2-cobalt](https://github.com/the-sink/gpt-2-cobalt) is the repo for the Python server allowing the ``complete`` command to work.
+
 ## Requirements
 
 - `git`
