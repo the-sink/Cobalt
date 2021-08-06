@@ -16,10 +16,15 @@ module.exports = async (client, interaction) => {
 
     interaction.user.permLevel = level;
   
-    interaction.flags = [];
-    //while (args[0] && args[0][0] === "-") {
-    //    interaction.flags.push(args.shift().slice(1));
-    //}
+    if (level < client.levelCache[cmd.conf.permLevel]) {
+        if (client.config.systemNotice === "true") {
+            return interaction.reply(`${client.config.emojis.error} You do not have permission to use this command.
+        Your permission level is \`${level} (${client.config.permLevels.find(l => l.level === level).name})\`
+        This command requires level \`${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel})\``);
+        } else {
+            return;
+        }
+    }
 
     // If the command exists, **AND** the user has permission, run it.
     client.logger.cmd(`${client.config.permLevels.find(l => l.level === level).name} ${interaction.user.username} (${interaction.user.id}) ran command ${cmd.help.name}`);

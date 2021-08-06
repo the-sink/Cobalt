@@ -31,6 +31,7 @@ exports.run = (client, interaction, args, level) => {
       if (command.conf.aliases.length > 0) { // Only show this row if the command has 1 or more aliases
         str += `aliases:: ${command.conf.aliases.join(", ")}\n`;
       }
+      str += `required permission level:: ${command.conf.permLevel}\n`;
       str += `= ${command.help.name} =`;
       interaction.reply(Formatters.codeBlock("asciidoc", str));
     }
