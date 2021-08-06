@@ -1,6 +1,6 @@
-exports.run = async (client, message, args, level) => {
-  let response = await message.reply(`${client.config.emojis.loading} Contacting the finance department...`);
-  let data = client.finance.inquiry(message.member);
+exports.run = async (client, interaction, args, level) => {
+  let response = await interaction.reply(`${client.config.emojis.loading} Contacting the finance department...`);
+  let data = client.finance.inquiry(interaction.member);
   if (data){
     response.edit(`Your current bank balance is: \`$${data.bank}\`\nYour current cash on-hand is: \`$${data.cash}\``);
   } else {

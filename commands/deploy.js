@@ -1,4 +1,4 @@
-exports.run = async (client, message, args, level) => {
+exports.run = async (client, interaction, args, level) => {
   var data = [];
   var success = true;
 
@@ -16,13 +16,13 @@ exports.run = async (client, message, args, level) => {
   
   console.log(data);
 
-  const commands = await message.guild.commands.set(data).catch(function(e){
-    message.reply(`${client.config.emojis.error} Failed to deploy slash commands: \n\`\`\`${e}\`\`\``);
+  const commands = await interaction.guild.commands.set(data).catch(function(e){
+    interaction.reply(`${client.config.emojis.error} Failed to deploy slash commands: \n\`\`\`${e}\`\`\``);
     success = false;
   });
 
   if (success) {
-    message.reply(`Successfully deployed slash commands!`);
+    interaction.reply(`Successfully deployed slash commands!`);
   }
 };
 

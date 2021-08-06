@@ -2,12 +2,12 @@ const fetch = require("node-fetch");
 const Discord = require("discord.js");
 let lastRun = Date.now();
 
-exports.run = async (client, message, args, level) => {
+exports.run = async (client, interaction, args, level) => {
   if (Date.now()-lastRun > 3000) {
     lastRun = Date.now();
-    message.deferReply();
+    interaction.deferReply();
     const image = await fetch("https://thispersondoesnotexist.com/image");
-    message.editReply({files: [new Discord.MessageAttachment(image.body)]});
+    interaction.editReply({files: [new Discord.interactionAttachment(image.body)]});
   }
 };
 

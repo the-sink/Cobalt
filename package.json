@@ -1,6 +1,6 @@
 {
   "name": "cobalt",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "An updated version of the JKR Discord's \"Cobalt\" bot, built on the framework of guidebot.",
   "main": "index.js",
   "scripts": {

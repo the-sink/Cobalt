@@ -6,26 +6,35 @@ module.exports = async (client) => {
 
     client.mutedRole = client.guild.roles.cache.find(role => role.name === "Muted");
 
-    client.mute = function(member, unmuteTime){
-        if (unmuteTime) {
-            client.mutes.set(member.id, unmuteTime);
-        }
+    client.mute = async function(member, unmuteTime){
+        var success = false;
 
-        member.roles.add(client.mutedRole).catch(function(e){
+        await member.roles.add(client.mutedRole).catch(function(e){
             client.logger.warn(e);
-            return false;
+            return;
         }).then(function(){
-            return true;
+            console.log(unmuteTime);
+            if (unmuteTime) {
+                client.mutes.set(member.id, unmuteTime);
+            }
+            success = true;
         });
+
+        console.log(success);
+        return success;
     }
-    client.unmute = function(member){
+    client.unmute = async function(member){
+        var success = false;
+
         client.mutes.delete(member.id);
-        member.roles.remove(client.mutedRole).catch(function(e){
+        await member.roles.remove(client.mutedRole).catch(function(e){
             client.logger.warn(e);
-            return false;
+            return;
         }).then(function(){
-            return true;
+            success = true;
         });
+
+        return success;
     }
     client.getRemainingMuteLength = function(member){
         let unmuteTime = client.mutes.get(member.id);

@@ -12,7 +12,7 @@ function isEmoji(str) {
 module.exports = (client) => {
     client.inspectRestricted = function(message){
         if(message.member.roles.cache.find(r => r.name === "Restricted")){
-            if (message.attachments.array().length > 0 || message.content.includes("http://") || message.content.includes("https://") || message.content.includes("<:") && message.content.includes(">") || isEmoji(message.content)){
+            if (message.attachments.values().length > 0 || message.content.includes("http://") || message.content.includes("https://") || message.content.includes("<:") && message.content.includes(">") || isEmoji(message.content)){
                 message.delete();
                 return true;
             }

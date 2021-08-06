@@ -1,16 +1,16 @@
 const fetch = require("node-fetch");
 
-exports.run = async (client, message, args, level) => {
+exports.run = async (client, interaction, args, level) => {
   let sessionKey = client.settings.get("inspireSessionKey");
   if (!client.config.modules.ai){
-    message.reply(`${client.config.emojis.error} The AI module is disabled! This command cannot be run.`);
+    interaction.reply(`${client.config.emojis.error} The AI module is disabled! This command cannot be run.`);
     return;
   } else if (sessionKey == null){
-    message.reply(`${client.config.emojis.error} InspiroBot session key missing! Cannot run this command at the moment. This may be a bot issue.`);
+    interaction.reply(`${client.config.emojis.error} InspiroBot session key missing! Cannot run this command at the moment. This may be a bot issue.`);
     return;
   }
-  if (message.member.voice.channel) {
-    const channel = message.member.voice.channel;
+  if (interaction.member.voice.channel) {
+    const channel = interaction.member.voice.channel;
     const connection = client.Voice.joinVoiceChannel({channelId: channel.id, guildId: channel.guild.id, adapterCreator: channel.guild.voiceAdapterCreator});
     const player = client.Voice.createAudioPlayer();
 
@@ -20,7 +20,7 @@ exports.run = async (client, message, args, level) => {
     player.on('stateChange', (oldState, newState) => {
       if (oldState.status === client.Voice.AudioPlayerStatus.Playing && newState.status === client.Voice.AudioPlayerStatus.Idle) {
         connection.disconnect();
-        message.deleteReply();
+        interaction.deleteReply();
       }
     });
 
@@ -31,15 +31,15 @@ exports.run = async (client, message, args, level) => {
               .then(body => {
                 const resource = client.Voice.createAudioResource(body.mp3, {inputType: client.Voice.StreamType.Arbitrary});
                 player.play(resource);
-                message.deferReply();
+                interaction.deferReply();
               });
         } catch (err) {
-            message.reply(`${client.config.emojis.error} An error has occured while attempting to play inspirobot audio!`);
+            interaction.reply(`${client.config.emojis.error} An error has occured while attempting to play inspirobot audio!`);
             client.logger.warn(`Error while retrieving/playing InspiroBot audio: ${err}`)
         };
     })();
   } else {
-    message.reply(`${client.config.emojis.error} You are not in a voice channel!`);
+    interaction.reply(`${client.config.emojis.error} You are not in a voice channel!`);
   }
 };
 

@@ -2,14 +2,20 @@ const fetch = require("node-fetch");
 const fs = require("fs");
 var running = false;
 
-exports.run = async (client, message, args, level) => {
+exports.run = async (client, interaction, args, level) => {
     if (running) {
-        message.reply("the bot is already running a completion task! Please wait for it to finish first.");
+        await interaction.reply("The bot is already running a completion task! Please wait for it to finish first.");
         return;
     }
-    var str = message.content.replace(`${client.config.prefix}complete `, "").replace(`${client.config.prefix}continue `, "");
-    message.reply("<a:loading:776537774391164949> Completing your prompt (this will probably take around 1 ½ minutes)...")
-        .then(msg => {
+    var str = await interaction.options.getString("prompt");
+    console.log(str);
+    if (!str | str.length < 6) {
+        await interaction.reply("Prompt response is too short! Minimum 6 characters.");
+        return;
+    }
+
+    await interaction.deferReply()
+        .then(function(){
             running = true;
             try {
                 fetch('http://192.168.1.92:7001', {
@@ -21,30 +27,29 @@ exports.run = async (client, message, args, level) => {
                         running = false;
                         if (res.ok) {
                             var text = await res.text();
-                            var response = await client.clean(client, str + text.replace("<|endoftext|>", " ")); // `<@${message.author.id}>, ` + 
-                            msg.delete();
-                            message.reply(response.substring(0, 1900)).catch(err => {
+                            var response = await client.clean(client, str + text.replace("<|endoftext|>", " ")); // `<@${interaction.author.id}>, ` + 
+                            interaction.editReply(response.substring(0, 1900)).catch(err => {
                                 running = false;
-                                msg.edit(`<@${message.author.id}>, an error has occurred posting the response to Discord.`);
+                                interaction.editReply(`An error has occurred posting the response to Discord.`);
                             });
                         } else {
                             running = false;
-                            msg.edit(`<@${message.author.id}>, an error has occurred generating the rest of that prompt.`);
+                            interaction.editReply(`An error has occurred generating the rest of that prompt.`);
                         }
                     })
                     .catch(err => {
                         running = false;
                         console.log(err);
                         if (err.code == "ECONNREFUSED") {
-                            msg.edit(`<@${message.author.id}>, the gpt-2 server is currently offline. It may be undergoing maintenance or has crashed.`);
+                            interaction.editReply(`The gpt-2 server is currently offline. It may be undergoing maintenance or has crashed.`);
                         } else {
-                            msg.edit(`<@${message.author.id}>, an error has occurred fetching the response.`);
+                            interaction.editReply(`Tn error has occurred fetching the response.`);
                         }
                     });
             } catch(err){
                 running = false;
                 console.log(err);
-                msg.edit(`<@${message.author.id}>, a bot error has occured.`);
+                interaction.editReply(`A bot error has occured.`);
             }
         });
 };
@@ -54,6 +59,17 @@ exports.conf = {
   guildOnly: false,
   aliases: ["continue"],
   permLevel: "User"
+};
+
+exports.options = function(client){
+    return [
+      {
+        name: "prompt",
+        type: "STRING",
+        description: "The prompt to be completed.",
+        required: true
+      }
+    ]
 };
 
 exports.help = {

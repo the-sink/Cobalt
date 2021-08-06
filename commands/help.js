@@ -1,10 +1,10 @@
 const { Formatters } = require("discord.js");
 
-exports.run = (client, message, args, level) => {
-  var specificCommand = message.options.getString("command");
+exports.run = (client, interaction, args, level) => {
+  var specificCommand = interaction.options.getString("command");
 
   if (!specificCommand) { // Show all commands
-    const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
+    const myCommands = interaction.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
 
     const commandNames = myCommands.keyArray();
     const keywords = client.responses;
@@ -22,7 +22,7 @@ exports.run = (client, message, args, level) => {
       output += `${client.config.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
     });
     output += `\nAvailable info commands :: ${Object.keys(keywords).join(", ")}`;
-    message.reply(Formatters.codeBlock("asciidoc", output));
+    interaction.reply(Formatters.codeBlock("asciidoc", output));
   } else { // Show individual command
     if (client.commands.has(specificCommand)) {
       command = client.commands.get(specificCommand);
@@ -32,7 +32,7 @@ exports.run = (client, message, args, level) => {
         str += `aliases:: ${command.conf.aliases.join(", ")}\n`;
       }
       str += `= ${command.help.name} =`;
-      message.reply(Formatters.codeBlock("asciidoc", str));
+      interaction.reply(Formatters.codeBlock("asciidoc", str));
     }
   }
 };
@@ -58,7 +58,7 @@ exports.options = function(client){
       choices: choices
     }
   ]
-}
+};
 
 exports.help = {
   name: "help",

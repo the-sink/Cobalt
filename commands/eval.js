@@ -6,14 +6,16 @@
 
 // However it's, like, super ultra useful for troubleshooting and doing stuff
 // you don't want to put in a command.
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  const code = args.join(" ");
+exports.run = async (client, interaction, args, level) => { // eslint-disable-line no-unused-vars
+  const code = interaction.options.getString("code");
   try {
     const evaled = eval(code);
     const clean = await client.clean(client, evaled);
-    message.reply(`\`\`\`js\n${clean}\n\`\`\``);
+    interaction.reply(`\`\`\`js\n${clean}\n\`\`\``).catch(function(e){
+      interaction.reply(`Failed to send message: \`\`\`${e}\`\`\``);
+    });
   } catch (err) {
-    message.reply(`\`ERROR\` \`\`\`xl\n${await client.clean(client, err)}\n\`\`\``);
+    interaction.reply(`\`ERROR\` \`\`\`xl\n${await client.clean(client, err)}\n\`\`\``);
   }
 };
 
@@ -22,6 +24,17 @@ exports.conf = {
   guildOnly: false,
   aliases: [],
   permLevel: "Bot Owner"
+};
+
+exports.options = function(client){
+  return [
+    {
+      name: "code",
+      type: "STRING",
+      description: "The code to be executed.",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

@@ -1,17 +1,11 @@
-exports.run = async (client, message, args, level) => {
-  let member = message.mentions.members.first();
-
-  if (member == null){
-      message.reply(`${client.config.emojis.error} You must mention someone to unmute them!`);
-      return;
-  }
-
+exports.run = async (client, interaction, args, level) => {
+  let member = interaction.options.getMember("user");
   let success = client.unmute(member);
   
   if (success) {
-      message.reply(`:white_check_mark: Successfully unmuted \`${client.getFullUsername(member)}\`!`);
+      interaction.reply(`:white_check_mark: Successfully unmuted \`${client.getFullUsername(member)}\`!`);
   } else {
-      message.reply(`${client.config.emojis.error} Error: User was unable to be unmuted.`);
+      interaction.reply(`${client.config.emojis.error} Error: User was unable to be unmuted.`);
   }
 };
 
@@ -20,6 +14,17 @@ exports.conf = {
   guildOnly: true,
   aliases: [],
   permLevel: "Moderator"
+};
+
+exports.options = function(client){
+  return [
+    {
+      name: "user",
+      type: "USER",
+      description: "The user to be unmuted.",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

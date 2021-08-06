@@ -62,7 +62,7 @@ client.sendEmbed = function(message, options){
   if (options.footer) {
     embed.setFooter(options.footer);
   }
-  message.reply({ embeds: [embed]});
+  message.editReply({ embeds: [embed]});
 }
 
 /*
