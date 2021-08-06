@@ -1,4 +1,11 @@
 module.exports = async (client, interaction) => {
+    if (interaction.isButton()) {
+        if (interaction.customId === 'retry') {
+            const cmd = client.commands.get(interaction.message.interaction.commandName);
+            cmd.run(client, interaction, {}, client.permlevel(interaction));
+        }
+    }
+
 	if (!interaction.isCommand()) return;
 
     // Get perm level and command data
