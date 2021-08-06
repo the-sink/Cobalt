@@ -11,7 +11,7 @@ exports.run = async (client, interaction, args, level) => {
         client.logger.warn("Someone tried to run \"becometester\" but noblox.js is not accessible. Maybe client.robloxCookie is empty/doesn't exist?");
     }
 
-    interactinteractionon.deferReply();
+    await interactinteractionon.deferReply();
     try {
         await fetch(`https://verify.eryn.io/api/user/${interactinteractionon.member.id}`)
         .then(res => res.json())

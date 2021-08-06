@@ -5,9 +5,9 @@ let lastRun = Date.now();
 exports.run = async (client, interaction, args, level) => {
   if (Date.now()-lastRun > 3000) {
     lastRun = Date.now();
-    interaction.deferReply();
+    await interaction.deferReply();
     const image = await fetch("https://thispersondoesnotexist.com/image");
-    interaction.editReply({files: [new Discord.messageAttachment(image.body)]});
+    interaction.editReply({files: [new Discord.MessageAttachment(image.body)]});
   }
 };
 

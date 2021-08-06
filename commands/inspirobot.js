@@ -2,11 +2,11 @@ const fetch = require("node-fetch");
 const Discord = require("discord.js");
 
 exports.run = async (client, interaction, args, level) => {
-  interaction.deferReply();
+  await interaction.deferReply();
   try {
       await fetch('http://inspirobot.me/api?generate=true')
         .then(res => res.text())
-        .then(body => interaction.editReply({files: [new Discord.messageAttachment(body)]}));
+        .then(body => interaction.editReply({files: [new Discord.MessageAttachment(body)]}));
   } catch (err) {
       interaction.editReply(`${client.config.emojis.error} An error has occured! InspiroBot may be having issues.`);
       client.logger.warn(`Error while retrieving/posting InspiroBot image: ${err}`);
