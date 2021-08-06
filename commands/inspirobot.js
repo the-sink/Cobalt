@@ -20,8 +20,8 @@ exports.run = async (client, interaction, args, level) => {
           if (interaction.type == "APPLICATION_COMMAND") {
             interaction.editReply(data)
           } else {
-            interaction.message.edit(client.config.emojis.loading);
-            interaction.message.removeAttachments();
+            await interaction.message.edit(client.config.emojis.loading);
+            await interaction.message.removeAttachments();
             await interaction.update(data);
             await interaction.message.edit(null);
           }
