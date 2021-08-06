@@ -19,7 +19,6 @@ module.exports = async (client) => {
         if (channel !== undefined){
             channel.setTopic(`${info.playing} online players | ${numberWithCommas(info.visits)} total visits`)
         }
-        client.user.setActivity(`;help | ${info.playing} playing CVRF`, { type: 'PLAYING' })
-            .catch(console.error);
+        client.user.setActivity(`;help | ${info.playing} playing CVRF`, { type: 'PLAYING' });
       }, 180000);
 };

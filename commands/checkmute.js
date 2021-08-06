@@ -5,16 +5,16 @@ exports.run = async (client, message, args, level) => {
   let member = message.mentions.members.first();
 
   if (member == null){
-    message.channel.send(`${client.config.emojis.error} You must mention someone to check them!`);
+    message.reply(`${client.config.emojis.error} You must mention someone to check them!`);
     return;
   }
 
   let length = client.getRemainingMuteLength(member);
  
   if (length != null) {
-    message.channel.send(`:alarm_clock: Remaning time until \`${client.getFullUsername(member)}\` is unmuted: \`${prettyMs(Math.round(length / 1000) * 1000).replace(/\s/g, "")}\`.`);
+    message.reply(`:alarm_clock: Remaning time until \`${client.getFullUsername(member)}\` is unmuted: \`${prettyMs(Math.round(length / 1000) * 1000).replace(/\s/g, "")}\`.`);
   } else {
-    message.channel.send(`${client.config.emojis.error} That user is not muted!`);
+    message.reply(`${client.config.emojis.error} That user is not muted!`);
   }
 };
 

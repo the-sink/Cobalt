@@ -6,8 +6,11 @@ const config = {
   // The prefix you must place before a command for it to be registered by the bot (such as "~command" vs "!command")
   "prefix": "-",
 
+  // The bot owner's user ID (you). Be sure you add yourself to the admin array below as well!
+  "owner": "0",
+
   // Bot Admins, level 9 by default. Array of user ID strings.
-  "admins": [],
+  "admins": ["0"],
 
   ///// The following are secrets, do not share these with anyone! /////
 
@@ -111,7 +114,7 @@ const config = {
     { level: 10,
       name: "Bot Owner", 
       // Another simple check, compares the message author id to a list of owners found in the bot application.
-      check: (message) => message.client.owners.includes(message.author.id)
+      check: (message) => message.author.id === config.owner
     }
   ]
 };

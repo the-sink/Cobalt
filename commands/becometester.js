@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => {
         client.logger.warn("Someone tried to run \"becometester\" but noblox.js is not accessible. Maybe client.robloxCookie is empty/doesn't exist?");
     }
 
-    message.channel.startTyping();
+    message.deferReply();
     try {
         await fetch(`https://verify.eryn.io/api/user/${message.author.id}`)
         .then(res => res.json())
@@ -77,7 +77,6 @@ exports.run = async (client, message, args, level) => {
                 });
             }
         });
-        message.channel.stopTyping();
     } catch (err) {
         client.sendEmbed(message, {
             title: "Network Error",
@@ -85,7 +84,6 @@ exports.run = async (client, message, args, level) => {
             color: 0xee3333
         });
         client.logger.warn(`Error while requesting Roblox account from RoVer API: ${err}`);
-        message.channel.stopTyping();
     };
 };
 

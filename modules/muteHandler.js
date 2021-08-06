@@ -10,13 +10,22 @@ module.exports = async (client) => {
         if (unmuteTime) {
             client.mutes.set(member.id, unmuteTime);
         }
-        member.roles.add(client.mutedRole).catch(client.logger.warn);
-        return true;
+
+        member.roles.add(client.mutedRole).catch(function(e){
+            client.logger.warn(e);
+            return false;
+        }).then(function(){
+            return true;
+        });
     }
     client.unmute = function(member){
         client.mutes.delete(member.id);
-        member.roles.remove(client.mutedRole).catch(client.logger.warn);
-        return true;
+        member.roles.remove(client.mutedRole).catch(function(e){
+            client.logger.warn(e);
+            return false;
+        }).then(function(){
+            return true;
+        });
     }
     client.getRemainingMuteLength = function(member){
         let unmuteTime = client.mutes.get(member.id);

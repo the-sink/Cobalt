@@ -25,18 +25,18 @@ module.exports = async (client, message) => {
   if (!cmd) {
     // Command doesn't exist. Now, search for simple response message stored in responses.js and if one exists send it.
     if (client.responses[command] != null){
-      message.channel.send(client.responses[command]);
+      message.reply(client.responses[command]);
     }
     return;
   }
 
   // Some commands may not be useable in DMs. This check prevents those commands from running and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly)
-    return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
+    return message.reply("This command is unavailable via private message. Please run this command in a guild.");
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
-      return message.channel.send(`${client.config.emojis.error} You do not have permission to use this command.
+      return message.reply(`${client.config.emojis.error} You do not have permission to use this command.
   Your permission level is \`${level} (${client.config.permLevels.find(l => l.level === level).name})\`
   This command requires level \`${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel})\``);
     } else {
@@ -57,7 +57,7 @@ module.exports = async (client, message) => {
   try {
     cmd.run(client, message, args, level);
   } catch(e) {
-    message.channel.send(`${client.config.emojis.error} An internal error occured while executing this command. The error has been logged.`);
+    message.reply(`${client.config.emojis.error} An internal error occured while executing this command. The error has been logged.`);
     client.logger.warn(`Command '${command}' encountered an error: ${e}`);
   }
 };

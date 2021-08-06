@@ -1,15 +1,29 @@
 if (process.env.npm_package_version == null) throw new Error("Bot must be run using npm for package-related metadata. Please use \"npm start\" to launch the bot.");
 
 const Discord = require("discord.js");
+const Voice = require("@discordjs/voice");
 const readdir = require("fs").promises.readdir;
 const Enmap = require("enmap");
 const roblox = require("noblox.js");
 const config = require("./config.js");
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  intents: [
+    Discord.Intents.FLAGS.GUILDS,
+    Discord.Intents.FLAGS.GUILD_MEMBERS,
+    Discord.Intents.FLAGS.GUILD_VOICE_STATES,
+    Discord.Intents.FLAGS.GUILD_PRESENCES,
+    Discord.Intents.FLAGS.GUILD_MESSAGES,
+    Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    Discord.Intents.FLAGS.GUILD_MESSAGE_TYPING,
+    Discord.Intents.FLAGS.DIRECT_MESSAGES
+  ],
+  allowedMentions: { parse: ['users', 'roles'], repliedUser: true }
+});
 
 client.config = config;
 client.logger = require("./modules/internal/logger.js");
+client.Voice = Voice;
 require("./modules/internal/functions.js")(client);
 
 // Set up noblox.js if a robloxCookie is given in the config
@@ -48,7 +62,7 @@ client.sendEmbed = function(message, options){
   if (options.footer) {
     embed.setFooter(options.footer);
   }
-  message.channel.send(embed);
+  message.reply({ embeds: [embed]});
 }
 
 /*

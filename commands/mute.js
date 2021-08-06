@@ -13,23 +13,26 @@ exports.run = async (client, message, args, level) => {
     try {
       length = timestring(input)*1000;
     } catch(e) {
-      message.channel.send(`${client.config.emojis.error} Error: Command unsuccessful. Did you use the proper syntax? (run \`-help mute\`)`);
+      message.reply(`${client.config.emojis.error} Error: Command unsuccessful. Did you use the proper syntax? (run \`-help mute\`)`);
       return;
     }
     if (length >= 60000){
       let unmuteTime = Date.now() + length;
-
-      let success = client.mute(member, unmuteTime);
+      let success = client.mute(member, unmuteTime)
       if (success){
-        message.channel.send(`:white_check_mark: Successfully muted \`${client.getFullUsername(member)}\` for \`${input}\`.`);
+        message.reply(`:white_check_mark: Successfully muted \`${client.getFullUsername(member)}\` for \`${input}\`.`);
+      } else {
+        message.reply(`${client.config.emojis.error} Error: User was unable to be muted.`);
       }
     } else {
-      message.channel.send(`${client.config.emojis.error} Error: Mute length must be 1 minute or greater!`);
+      message.reply(`${client.config.emojis.error} Error: Mute length must be 1 minute or greater!`);
     }
   } else {
     let success = client.mute(member);
     if (success){
-      message.channel.send(`:white_check_mark: Successfully muted \`${client.getFullUsername(member)}\`.`);
+      message.reply(`:white_check_mark: Successfully muted \`${client.getFullUsername(member)}\`.`);
+    } else {
+      message.reply(`${client.config.emojis.error} Error: User was unable to be muted.`);
     }
   }
 };

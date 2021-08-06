@@ -5,10 +5,9 @@ let lastRun = Date.now();
 exports.run = async (client, message, args, level) => {
   if (Date.now()-lastRun > 3000) {
     lastRun = Date.now();
-    message.channel.startTyping();
+    message.deferReply();
     const image = await fetch("https://thiscatdoesnotexist.com/");
-    message.channel.send({files: [new Discord.MessageAttachment(image.body)]});
-    message.channel.stopTyping();
+    message.editReply({files: [new Discord.MessageAttachment(image.body)]});
   }
 };
 

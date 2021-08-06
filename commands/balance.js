@@ -1,8 +1,8 @@
 exports.run = async (client, message, args, level) => {
-  let response = await message.channel.send(`${client.config.emojis.loading} Contacting the finance department...`);
+  let response = await message.reply(`${client.config.emojis.loading} Contacting the finance department...`);
   let data = client.finance.inquiry(message.member);
   if (data){
-    response.edit(`Your current bank balance is: \`$${data.bank}\`.\nYour current cash on-hand is: \`$${data.cash}\`.`);
+    response.edit(`Your current bank balance is: \`$${data.bank}\`\nYour current cash on-hand is: \`$${data.cash}\``);
   } else {
     response.edit(`${client.config.emojis.error} Error: Financial data is missing or invalid.`);
   }
