@@ -13,12 +13,12 @@ Please keep in mind, this bot is **NOT** designed to be run on more than one ser
 ## Requirements
 
 - `git`
-- `node` 12.0.0 or higher
+- `node` 16.0.0 or higher (required by discord.js v13)
 - node-gyp build tools (required for Enmap and many other libraries)
 
 ## Intents
 
-Intents can be added/removed near the top of ``index.js`` when the Discord client is created. For info about intents check out the [official Discord.js guide page](https://discordjs.guide/popular-topics/intents.html) and the [official Discord docs page](https://discord.com/developers/docs/topics/gateway#gateway-intents). Certain intents may require extra steps.
+Intents can be added/removed near the top of ``index.js`` when the Discord client is created. For info about intents check out the [official Discord.js guide page](https://discordjs.guide/popular-topics/intents.html) and the [official Discord docs page](https://discord.com/developers/docs/topics/gateway#gateway-intents). Certain intents may require extra steps. As of discord.js v13, declaring intents is **required**.
 
 ## Starting the bot
 
