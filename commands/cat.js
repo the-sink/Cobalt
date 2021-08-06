@@ -7,7 +7,7 @@ exports.run = async (client, interaction, args, level) => {
     lastRun = Date.now();
     interaction.deferReply();
     const image = await fetch("https://thiscatdoesnotexist.com/");
-    interaction.editReply({files: [new Discord.interactionAttachment(image.body)]});
+    interaction.editReply({files: [new Discord.messageAttachment(image.body)]});
   }
 };
 
