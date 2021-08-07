@@ -7,7 +7,11 @@ exports.run = async (client, interaction, args, level) => {
       new Discord.MessageButton()
         .setCustomId('retry')
         .setLabel('Generate new')
-        .setStyle('PRIMARY')
+        .setStyle('PRIMARY'),
+      new Discord.MessageButton()
+        .setCustomId('save')
+        .setLabel('Save')
+        .setStyle('SECONDARY')
     );
   if (interaction.type == "APPLICATION_COMMAND") {
     await interaction.deferReply();

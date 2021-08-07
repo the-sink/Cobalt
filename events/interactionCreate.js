@@ -1,8 +1,16 @@
 module.exports = async (client, interaction) => {
     if (interaction.isButton()) {
+        if (interaction.user.id !== interaction.message.interaction.user.id) {
+            interaction.reply({content: "Only the user who initiated this command can interact with buttons.", ephemeral: true});
+            return;
+        }
         if (interaction.customId === 'retry') {
             const cmd = client.commands.get(interaction.message.interaction.commandName);
             cmd.run(client, interaction, {}, client.permlevel(interaction));
+        } else if (interaction.customId === 'save'){
+            console.log("saving");
+            interaction.member.send({files: interaction.message.attachments});
+            interaction.reply({content: "Image saved to your DMs.", ephemeral: true});
         }
     }
 
