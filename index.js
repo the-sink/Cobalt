@@ -48,6 +48,9 @@ client.commands = new Enmap();
 client.aliases = new Enmap();
 client.settings = new Enmap({name: "settings"});
 client.mutes = new Enmap({name: "mutes"});
+
+client.lastSaves = {};
+
 //title, description, color, url, author, footer
 client.sendEmbed = function(message, options){
   if (!options || !message) {

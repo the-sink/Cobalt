@@ -8,7 +8,16 @@ module.exports = async (client, interaction) => {
             const cmd = client.commands.get(interaction.message.interaction.commandName);
             cmd.run(client, interaction, {}, client.permlevel(interaction));
         } else if (interaction.customId === 'save'){
-            console.log("saving");
+            var time = Math.round(Date.now() / 1000);
+            var current = client.lastSaves[interaction.member.id];
+            if (current){
+                if ((time - current) < 10) {
+                    interaction.reply({content: "Slow down! You can only save every 10 seconds.", ephemeral: true});
+                    return;
+                }
+            }
+            client.lastSaves[interaction.member.id] = time;
+
             interaction.member.send({files: interaction.message.attachments});
             interaction.reply({content: "Image saved to your DMs.", ephemeral: true});
         }
