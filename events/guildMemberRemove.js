@@ -2,7 +2,7 @@
 const fetch = require("node-fetch");
 
 module.exports = async (client, member) => {
-    let channel = client.config.channels.logChannel; 
+    let channel = client.config.channels.logChannel;
 
     if (client.settings.has(`uidCache_${member.id}`)) {
         let cachedId = client.settings.get(`uidCache_${member.id}`);
@@ -13,7 +13,7 @@ module.exports = async (client, member) => {
             client.settings.delete(`uidCache_${member.id}`);
 
             if (channel != "") {
-                channel.send(`\`${client.getFullUsername(member)}\` has left and has been demoted from Project Tester.`);
+                client.channels.cache.get(channel).send(`\`${client.getFullUsername(member)}\` has left and has been demoted from Project Tester.`);
             }
         }
     }
