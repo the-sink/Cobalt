@@ -1,10 +1,14 @@
 const { ENETUNREACH } = require("constants");
+const { watch } = require("fs");
 const http = require("http");
+const { setInterval } = require("timers");
 //const { message } = require("noblox.js");
 
 let servers = [];
 let index = 1;
 let channel;
+
+let watchdogList = {};
 
 function sendResponse(res, code, message){
 	try {
@@ -31,6 +35,9 @@ function update(json, res, add){
     let list = server.players.join(", ") || "None";
     if (server.private == true && server.branch == "Release"){list = "*(Private)*"};
     server.message.edit("> " + ((server.branch == "Development" && ":tools:") || "") + ((server.private == true && ":lock:") || "") +" Server " + server.id + " has: **" + server.players.length + " player(s) out of 42**. It was created on: **" + server.created +"**.\n Currently online: " + (list));
+    
+    watchdogList[json.serverKey] = Date.now();
+    
     sendResponse(res, 200, "Success");
 }
 
@@ -71,6 +78,14 @@ let actions = {
         } else {
             sendResponse(res, 500, "No player name provided.");
         }
+    },
+    "watchdog": function(json, res){
+        if (servers[json.serverKey] == null){
+            sendResponse(res, 500, "A server with that key does not exist.");
+            return;
+        }
+
+        watchdogList[json.serverKey] = Date.now();
     },
     "stop": function(json, res){ // Sent when a server is shutting down
         if (servers[json.serverKey] == null){
@@ -115,6 +130,22 @@ module.exports = (client) => {
         messages.filter(message => message.author.id === client.user.id && message.id != 851578736155295814).forEach(message => listMessages.push(message));
         channel.bulkDelete(listMessages);
     })
+
+    setInterval(() => {
+        const currentTime = Date.now();
+        for (const key in watchdogList){
+            const lastTime = watchdogList[key];
+
+            if (currentTime - lastTime > 300000) { // if no communication for over 5 minutes,
+                if (servers[key] != null) {
+                    servers[json.serverKey].message.delete(); // delete the server from the list (assume it's shut down)
+                    delete servers[json.serverKey];
+                }
+
+                delete watchdogList[key];
+            }
+        }
+    }, 60000); // check every minute
 
     // Start the HTTP server to listen for server list updates
     http.createServer((req, res) => {
