@@ -137,6 +137,7 @@ module.exports = (client) => {
             const lastTime = watchdogList[key];
 
             if (currentTime - lastTime > 300000) { // if no communication for over 5 minutes,
+                client.logger.log(`Removing server ${key} - passed watchdog timer threshold with no communication, server is *probably* shut down.`);
                 if (servers[key] != null) {
                     servers[json.serverKey].message.delete(); // delete the server from the list (assume it's shut down)
                     delete servers[json.serverKey];
