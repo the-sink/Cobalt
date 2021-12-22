@@ -13,7 +13,7 @@ module.exports = async (client, member) => {
             client.settings.delete(`uidCache_${member.id}`);
 
             if (channel != "") {
-                client.channels.cache.get(channel).send(`\`${client.getFullUsername(member)}\` has left and has been demoted from Project Tester.`);
+                client.channels.fetch(channel).then(channel => channel.send(`\`${client.getFullUsername(member)}\` has left and has been demoted from Project Tester.`));
             }
         }
     }

@@ -17,9 +17,9 @@ module.exports = async (client, member) => {
             if (body.status == "ok"){ // Successfully obtained Roblox account
               let name = body.robloxUsername;
               let id = body.robloxId;
-              client.channels.cache.get(channel).send(`\`${client.getFullUsername(member)}\` (\`${name} / ${id}\`) has joined the server.`);
+              client.channels.fetch(channel).then(channel => channel.send(`\`${client.getFullUsername(member)}\` (\`${name} / ${id}\`) has joined the server.`));
             } else {
-              client.channels.cache.get(channel).send(`\`${client.getFullUsername(member)}\` has joined the server. They are not yet verified`);
+              client.channels.fetch(channel).then(channel => channel.send(`\`${client.getFullUsername(member)}\` has joined the server. They are not yet verified.`));
             }
         });
     } catch(e) {
