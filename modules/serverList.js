@@ -96,6 +96,7 @@ let actions = {
         // Remove server message and clear from list
         servers[json.serverKey].message.delete();
         delete servers[json.serverKey];
+        delete watchdogList[key];
         sendResponse(res, 200, "Success");
     }
 }
