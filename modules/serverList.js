@@ -63,6 +63,9 @@ let actions = {
                 private: json.private
             }
         });
+
+        watchdogList[json.serverKey] = Date.now();
+
         sendResponse(res, 200, "Success");
     },
     "playerAdd": function(json, res){ // Sent when a player has joined a server
