@@ -82,13 +82,13 @@ let actions = {
             sendResponse(res, 500, "No player name provided.");
         }
     },
-    "watchdog": function(json, res){
+    "watchdog": function(json, res){ // Sent by the server every minute to confirm it's still running
         if (servers[json.serverKey] == null){
             sendResponse(res, 500, "A server with that key does not exist.");
             return;
         }
 
-        watchdogList[json.serverKey] = Date.now();
+        //watchdogList[json.serverKey] = Date.now();
     },
     "stop": function(json, res){ // Sent when a server is shutting down
         if (servers[json.serverKey] == null){
