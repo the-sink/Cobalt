@@ -88,7 +88,7 @@ let actions = {
             return;
         }
 
-        //watchdogList[json.serverKey] = Date.now();
+        watchdogList[json.serverKey] = Date.now();
     },
     "stop": function(json, res){ // Sent when a server is shutting down
         if (servers[json.serverKey] == null){
