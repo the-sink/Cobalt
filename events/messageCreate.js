@@ -4,7 +4,7 @@ module.exports = async (client, message) => { // https://labs.bible.org/api/?pas
     client.inspectRestricted(message)
   }
 
-  if (Math.floor(Math.random() * 10) == 1) {
+  if (true) { // Math.floor(Math.random() * 100) == 1
     message.reply("test");
   }
 };
