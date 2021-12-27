@@ -83,12 +83,15 @@ let actions = {
         }
     },
     "watchdog": function(json, res){ // Sent by the server every minute to confirm it's still running
+        console.log("Recieved watchdog");
         if (servers[json.serverKey] == null){
+            console.log("Server key doesn't exist");
             sendResponse(res, 500, "A server with that key does not exist.");
             return;
         }
 
         watchdogList[json.serverKey] = Date.now();
+        console.log(watchdogList[json.serverKey]);
     },
     "stop": function(json, res){ // Sent when a server is shutting down
         if (servers[json.serverKey] == null){
