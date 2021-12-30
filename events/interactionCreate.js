@@ -1,4 +1,11 @@
 module.exports = async (client, interaction) => {
+    const channelId = interaction.channel.id;
+
+    if (client.config.blockedChannels.includes(channelId)) {
+        interaction.reply({content: "You cannot run Cobalt commands in this channel!", ephemeral: true});
+        return;
+    }
+
     if (interaction.isButton()) {
         if (interaction.user.id !== interaction.message.interaction.user.id) {
             interaction.reply({content: "Only the user who initiated this command can interact with buttons.", ephemeral: true});

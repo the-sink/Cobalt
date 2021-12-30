@@ -41,6 +41,8 @@ const config = {
     "logChannel": ""
   },
 
+  "blockedChannels": [],
+
   // API endpoints, needed for some commands
   "endpoints": {},
 
