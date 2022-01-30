@@ -43,7 +43,7 @@ exports.run = async (client, interaction, args, level) => {
                         if (err.code == "ECONNREFUSED") {
                             interaction.editReply(`The gpt-2 server is currently offline. It may be undergoing maintenance or has crashed.`);
                         } else {
-                            interaction.editReply(`Tn error has occurred fetching the response.`);
+                            interaction.editReply(`An error has occurred fetching the response.`);
                         }
                     });
             } catch(err){
