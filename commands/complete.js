@@ -17,40 +17,30 @@ exports.run = async (client, interaction, args, level) => {
     await interaction.deferReply()
         .then(function(){
             running = true;
-            try {
-                fetch('http://192.168.1.92:7001', {
-                        method: 'post',
-                        body:    str,
-                        headers: { 'Content-Type': 'text/plain' },
-                    })
-                    .then(async function(res){
-                        running = false;
-                        if (res.ok) {
-                            var text = await res.text();
-                            var response = await client.clean(client, str + text.replace("<|endoftext|>", " ")); // `<@${interaction.author.id}>, ` + 
-                            interaction.editReply(response.substring(0, 1900)).catch(err => {
-                                running = false;
-                                interaction.editReply(`An error has occurred posting the response to Discord.`);
-                            });
-                        } else {
-                            running = false;
-                            interaction.editReply(`An error has occurred generating the rest of that prompt.`);
-                        }
-                    })
-                    .catch(err => {
-                        running = false;
-                        console.log(err);
-                        if (err.code == "ECONNREFUSED") {
-                            interaction.editReply(`The gpt-2 server is currently offline. It may be undergoing maintenance or has crashed.`);
-                        } else {
-                            interaction.editReply(`An error has occurred fetching the response.`);
-                        }
+            (async () => {
+                try {
+                    const response = await client.openai.complete({
+                        engine: 'davinci',
+                        prompt: str,
+                        maxTokens: 100,
+                        temperature: 0.3,
+                        topP: 0.3,
+                        presencePenalty: 0,
+                        frequencyPenalty: 0.5,
+                        bestOf: 1,
+                        n: 1,
+                        stream: false
                     });
-            } catch(err){
-                running = false;
-                console.log(err);
-                interaction.editReply(`A bot error has occured.`);
-            }
+                    console.log(response.data);
+                    interaction.editReply(`${str + response.data.choices[0].text}`);
+                    running = false;
+                } catch(err){
+                    running = false;
+                    console.log(err);
+                    interaction.editReply(`A bot error has occured.`);
+                    running = false;
+                }
+            })();
         });
 };
 

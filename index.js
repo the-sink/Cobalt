@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const Voice = require("@discordjs/voice");
 const readdir = require("fs").promises.readdir;
 const Enmap = require("enmap");
+const OpenAI = require('openai-api');
 const roblox = require("noblox.js");
 const config = require("./config.js");
 
@@ -23,6 +24,7 @@ const client = new Discord.Client({
 
 client.config = config;
 client.logger = require("./modules/internal/logger.js");
+client.openai = new OpenAI(client.config.openAIKey);
 client.Voice = Voice;
 require("./modules/internal/functions.js")(client);
 

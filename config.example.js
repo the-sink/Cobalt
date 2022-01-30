@@ -23,6 +23,9 @@ const config = {
   // The key to be used for authorizing server list-related network messages.
   "serverListKey": "",
 
+  // OpenAI Key
+  "openAIKey": "",
+
   //////////////////////////////////////////////////////////////////////
 
   // List of modules that can be enabled/disabled

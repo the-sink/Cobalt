@@ -33,6 +33,7 @@
     "noblox.js": "^4.8.4",
     "node-fetch": "^2.6.1",
     "node-opus": "^0.3.3",
+    "openai-api": "^1.2.6",
     "pretty-ms": "^7.0.1",
     "timestring": "^6.0.0",
     "yahoo-finance": "^0.3.7"
