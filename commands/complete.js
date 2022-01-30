@@ -25,7 +25,7 @@ exports.run = async (client, interaction, args, level) => {
                         maxTokens: 100,
                         temperature: 0.3,
                         topP: 0.3,
-                        presencePenalty: 0,
+                        presencePenalty: 0.5,
                         frequencyPenalty: 0.5,
                         bestOf: 1,
                         n: 1,
