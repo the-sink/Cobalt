@@ -53,7 +53,7 @@ exports.run = async (client, interaction, args, level) => {
                         case 0:
                             client.sendEmbed(interaction, {
                                 title: "Promotion Rejected",
-                                description: "You are not in the group. Please join JKR Productions on Roblox to be promoted to Project Tester. Click the next above to navigate to the group page.",
+                                description: "You are not in the group. Please join JKR Studios on Roblox to be promoted to Project Tester. Click the next above to navigate to the group page.",
                                 color: 0xee3333,
                                 url: "https://www.roblox.com/groups/970502/JK-Production",
                                 author: authorData
