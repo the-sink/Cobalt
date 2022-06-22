@@ -23,7 +23,7 @@ const config = {
   // The key to be used for authorizing server list-related network messages.
   "serverListKey": "",
 
-  // OpenAI Key
+  // OpenAI Key (if you intend to use the /complete command)
   "openAIKey": "",
 
   //////////////////////////////////////////////////////////////////////
@@ -34,7 +34,6 @@ const config = {
     "restrictedRole": true,
     "muteHandler": true,
     "ai": true,
-    "finance": true,
     "playerCount": true
   },
 

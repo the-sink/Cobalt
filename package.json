@@ -23,7 +23,6 @@
     "@discordjs/opus": "^0.3.3",
     "@discordjs/voice": "^0.5.5",
     "@mapbox/node-pre-gyp": "^1.0.0",
-    "better-sqlite3": "^7.4.3",
     "chalk": "^4.1.0",
     "discord.js": "^13.0.0",
     "enmap": "^5.8.4",
@@ -33,9 +32,8 @@
     "noblox.js": "^4.8.4",
     "node-fetch": "^2.6.1",
     "node-opus": "^0.3.3",
-    "openai-api": "^1.2.6",
+    "openai": "^3.0.0",
     "pretty-ms": "^7.0.1",
-    "timestring": "^6.0.0",
-    "yahoo-finance": "^0.3.7"
+    "timestring": "^6.0.0"
   }
 }
