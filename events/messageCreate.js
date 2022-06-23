@@ -6,7 +6,7 @@ module.exports = async (client, message) => { // https://labs.bible.org/api/?pas
     client.inspectRestricted(message)
   }
 
-  if (Math.floor(Math.random() * 85) == 1) {
+  if (Math.floor(Math.random() * 600) == 1) {
     await fetch("https://labs.bible.org/api/?passage=random&type=json")
     .then(res => res.json())
     .then(body => {
